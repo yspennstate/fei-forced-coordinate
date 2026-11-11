@@ -41,15 +41,19 @@ multiple of $\pi$, from one class of coefficients to the next.
 
 For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ and let $U$ be a random subset with
 $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy-influence conjecture of Friedgut and Kalai~\cite{FK96} asks for an absolute
-$C$ with $H(U)\le C\,\E|U|$. The erasure entropy of $f$ at a coordinate $x$ is
+$C$ with $H(U)\le C\,\E|U|$. It is known for symmetric functions and read-once decision trees~\cite{OWZ}, it is
+preserved under suitable compositions~\cite{OT13}, and weaker forms and bounds with extra factors are
+in~\cite{CKLS,WWW,KKLMS,Han}; lower bounds on the best constant are in~\cite{Hod}. The erasure entropy of $f$ at a coordinate $x$ is
 \[
 E_x(f)=H\bigl(\mathbf 1[x\in U]\bigm|U\setminus\{x\}\bigr),
 \]
-and with $\Inf_x(f)=\Pr[x\in U]$ the conjecture holds if and only if
+the conditional entropy of one coordinate given the others, in the sense of Verd\'u and Weissman~\cite{VW08}, and
+with $\Inf_x(f)=\Pr[x\in U]$ the conjecture holds if and only if
 \[
 \sup_f\ \min_{x:\,\Inf_x(f)>0}\frac{E_x(f)}{\Inf_x(f)}
 \]
-is finite~\cite{Shm1}. Since conditioning does not increase entropy,
+is finite~\cite{Shm1}; coordinates at which the ratio is bounded for some classes of functions are studied
+in~\cite{Shm3}. Since conditioning does not increase entropy,
 \begin{equation}\label{eq:upper}
 \frac{E_x(f)}{\Inf_x(f)}\le\frac{h_2(\Inf_x(f))}{\Inf_x(f)}\le\log_2\frac{e}{\Inf_x(f)}
 \end{equation}
@@ -80,8 +84,8 @@ $\Inf_x(F_k)=(3/4)^{k-1}$ and, as $k\to\infty$ through odd values,
 \end{theorem}
 
 The upper half of the theorem is~\eqref{eq:upper}. The exact values computed in Section~\ref{sec:num} approach the
-bound slowly: the quotient of the ratio by $(k-1)\log_2\frac43$ is $0.80$ at $k=21$, $0.88$ at $k=81$ and $0.90$ at
-$k=141$.
+bound slowly: the quotient of the ratio by $(k-1)\log_2\frac43$ is $0.80$ at $k=21$, $0.88$ at $k=81$ and $0.92$ at
+$k=141$, increasing in $k$ over the computed range.
 
 \section{The ratio as a double sum}\label{sec:sum}
 
@@ -94,7 +98,8 @@ $q$. By the proof of~\cite[Proposition~12]{Shm8}, $E_x(F_k)$ and $\Inf_x(F_k)$ a
 influence of $x$ for the law $c(S)^2$, where $c(S)$ are the coefficients of $\tilde f_k$, in $\pm1$ values, in the
 orthonormal basis $\prod_{j\in S}\phi_j(y_j)$ (times $2x-1$ when $x\in S$) of the product measure on $(y,x)$ with
 $\Pr[y_j=1]=\mu_j$ and $x$ uniform; here $\mu_j=P$ for $j\le m$, $\mu_j=q$ for $j>m$, and
-$\phi_j(y)=(y-\mu_j)/\sigma$ with $\sigma=\sqrt{Pq}=\sqrt3/4$.
+$\phi_j(y)=(y-\mu_j)/\sigma$ with $\sigma=\sqrt{Pq}=\sqrt3/4$ (the $\mu$-biased Fourier basis,
+see~\cite[Chapter~8]{OD14}; the conjecture for biased product measures is formulated in~\cite{KMS12}).
 
 With $+1$ for true, $\tilde f_k=\bar A+(2x-1)D$, where
 \[
@@ -167,7 +172,8 @@ t_{uv}=[z^m]\,Q_{uv}(z)=\frac1{2\pi}\int_{-\pi}^{\pi}Q_{uv}(e^{\ii\theta})\,e^{-
 
 \begin{proof}
 Write $Q_{uv}=\sum_cg_cz^c$. Then $[z^c]H_{uv}=g_{c-1}-g_c$, and the sum over $c\ge m+1$ telescopes to $g_m$ because
-$Q_{uv}$ has degree one less than $H_{uv}$. The integral is Cauchy's formula on $|z|=1$.
+$Q_{uv}$ has degree one less than $H_{uv}$. The integral is Cauchy's formula on $|z|=1$; coefficient extraction of this kind, followed by a Laplace or
+saddle-point estimate, is standard~\cite[Chapter~VIII]{FS09}.
 \end{proof}
 
 On the circle the three factors of $Q_{uv}$ have explicit moduli. For $z=e^{\ii\theta}$ and $w=\cos\theta$,
@@ -271,7 +277,7 @@ rational then $\cos\alpha\in\{0,\pm\frac12,\pm1\}$.
 
 The equality $\Inf_x(F_k)=(3/4)^{k-1}$ is Lemma~\ref{lem:sum}, and the upper bound is~\eqref{eq:upper}. For the lower
 bound fix $\varepsilon\in(0,\frac14)$, $\lambda\ge1$ and an integer $L\ge1$. Since $\alpha/\pi$ is irrational, the
-sequence $\ell\alpha/\pi$ is equidistributed modulo~$1$ (Weyl), with discrepancy tending to $0$; the set of $\psi$
+sequence $\ell\alpha/\pi$ is equidistributed modulo~$1$~\cite{Weyl16}, with discrepancy tending to $0$; the set of $\psi$
 modulo $\pi$ with $|\cos\psi|<2\varepsilon$ is an interval of length $2\arcsin2\varepsilon\le2\pi\varepsilon$. So we may
 take $L$ so large that for every real $\psi_0$ at most $3\varepsilon L$ of the numbers $\ell=0,\dots,L-1$ satisfy
 $|\cos(\psi_0+\ell\alpha)|<2\varepsilon$.
@@ -305,22 +311,22 @@ gives $\liminf\ge1$. \qed
 \begin{remark}
 In $v$ the factor is $(z-1)/Y$, and $(z^*-1)/Y(z^*)=\frac43(-\frac13+\frac{2\sqrt2}3\ii)$, so the phase step is
 $\pi-\alpha$ and the step from $(u,v)$ to $(u+1,v+1)$ is $\pi$: to first order the sign of $t_{uv}$ alternates along
-diagonals. The ratio is not monotone in $k$; it falls from $52.59$ at $k=133$ to $50.32$ at $k=135$
-(Section~\ref{sec:num}).
+diagonals.
 \end{remark}
 
 \section{Numerical checks}\label{sec:num}
 
 Lemma~\ref{lem:sum} turns the ratio into a double sum of $(m+1)^2$ terms whose ingredients are integers over powers of
-$4$, so it can be evaluated exactly in rational arithmetic. The ratio $R_k=E_x(F_k)/\Inf_x(F_k)$ and the quotient
+$4$, so the coefficients can be computed exactly in rational arithmetic; each term of $\Phi$ is then evaluated as
+$p\log(1+q/p)$ with a $\log(1+\cdot)$ routine, since $p/q$ reaches $10^{17}$ for $k$ above $120$. The ratio $R_k=E_x(F_k)/\Inf_x(F_k)$ and the quotient
 $R_k/((k-1)\log\frac43)$ are:
 \begin{center}
 \begin{tabular}{rrr@{\qquad}rrr}
 $k$ & $R_k$ & quotient & $k$ & $R_k$ & quotient\\ \hline
 $21$ & $6.631$ & $0.799$ & $101$ & $37.249$ & $0.898$\\
-$41$ & $13.826$ & $0.833$ & $121$ & $45.334$ & $0.910$\\
-$61$ & $21.448$ & $0.861$ & $133$ & $52.589$ & $0.960$\\
-$81$ & $29.311$ & $0.883$ & $141$ & $52.344$ & $0.901$
+$41$ & $13.826$ & $0.833$ & $121$ & $45.276$ & $0.909$\\
+$61$ & $21.448$ & $0.861$ & $133$ & $50.138$ & $0.915$\\
+$81$ & $29.311$ & $0.883$ & $141$ & $53.319$ & $0.918$
 \end{tabular}
 \end{center}
 For $k=3,5,7,9$ the values $1.0512$, $1.8769$, $2.5690$, $3.1179$ agree to $10^{-9}$ with the ratio computed from the
@@ -363,12 +369,34 @@ The paper is part of the Math Brain project, whose public repository is
 \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
 
 \begin{thebibliography}{99}
+\bibitem{CKLS} S.~Chakraborty, R.~Kulkarni, S.~V.~Lokam, N.~Saurabh, Upper bounds on Fourier entropy, Theoret.
+Comput. Sci. 654 (2016), 92--112.
+\bibitem{FS09} P.~Flajolet, R.~Sedgewick, \emph{Analytic Combinatorics}, Cambridge University Press, 2009.
 \bibitem{FK96} E.~Friedgut, G.~Kalai, Every monotone graph property has a sharp threshold, Proc. Amer. Math. Soc.
 124 (1996), 2993--3002.
+\bibitem{Han} X.~Han, A new bound for the Fourier-entropy-influence conjecture, Combinatorica 45 (2025), no.~1,
+Paper~4, arXiv:2312.08271.
+\bibitem{Hod} R.~Hod, Improved lower bounds for the Fourier entropy/influence conjecture via lexicographic functions,
+arXiv:1711.00762, 2017.
+\bibitem{KKLMS} E.~Kelman, G.~Kindler, N.~Lifshitz, D.~Minzer, M.~Safra, Towards a proof of the Fourier-entropy
+conjecture?, Geom. Funct. Anal. 30 (2020), 1097--1138.
+\bibitem{KMS12} N.~Keller, E.~Mossel, T.~Schlank, A note on the entropy/influence conjecture, Discrete Math. 312
+(2012), 3364--3372, arXiv:1105.2651.
+\bibitem{OD14} R.~O'Donnell, \emph{Analysis of Boolean Functions}, Cambridge University Press, 2014.
+\bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture, ICALP 2013.
+\bibitem{OWZ} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of
+Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
+\bibitem{VW08} S.~Verd\'u, T.~Weissman, The information lost in erasures, IEEE Trans. Inform. Theory 54 (2008),
+5030--5058.
+\bibitem{WWW} A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols and the entropy-influence conjecture, ITCS 2014,
+arXiv:1312.3003.
+\bibitem{Weyl16} H.~Weyl, \"Uber die Gleichverteilung von Zahlen mod.~Eins, Math. Ann. 77 (1916), 313--352.
 \bibitem{Niv} I.~Niven, \emph{Irrational Numbers}, Carus Mathematical Monographs 11, Mathematical Association of
 America, 1956, Corollary~3.12.
 \bibitem{Shm1} Y.~Shmalo, The one-coordinate step in the Fourier entropy-influence conjecture,
 \url{https://github.com/yspennstate/fourier-entropy-influence-one-coordinate}, 2026.
+\bibitem{Shm3} Y.~Shmalo, Good coordinates in the Fourier entropy-influence conjecture,
+\url{https://github.com/yspennstate/fei-good-coordinates}, 2026.
 \bibitem{Shm8} Y.~Shmalo, Hidden coordinates and selection rules in the Fourier entropy-influence conjecture,
 \url{https://github.com/yspennstate/fei-hidden-coordinates}, 2026.
 \bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
