@@ -1,0 +1,6 @@
+k=41 real-phi0 form: max |Laplace - exact| / |T| = 0.14908  (max |Re Lam'(phi0)| = 3.6e-15)
+k=41 m=20 classes=81 max |Laplace - exact| / envelope = 0.08034  (times m: 1.607)  phi* real in [0.3668, 1.7029], |imag| <= 0.2048
+k=81 real-phi0 form: max |Laplace - exact| / |T| = 0.09463  (max |Re Lam'(phi0)| = 8.9e-15)
+k=81 m=40 classes=169 max |Laplace - exact| / envelope = 0.02131  (times m: 0.852)  phi* real in [0.6971, 1.6038], |imag| <= 0.1544
+k=141 real-phi0 form: max |Laplace - exact| / |T| = 0.07106  (max |Re Lam'(phi0)| = 1.8e-14)
+k=141 m=70 classes=289 max |Laplace - exact| / envelope = 0.00936  (times m: 0.655)  phi* real in [0.8282, 1.5040], |imag| <= 0.1163

@@ -1,0 +1,382 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{hyperref}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Inf}{\mathrm{Inf}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\MAJ}{\mathrm{MAJ}}
+\newcommand{\ii}{\mathrm{i}}
+
+\title{A forced coordinate with nearly maximal erasure entropy}
+\author{Yitzchak Shmalo}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+The erasure entropy $E_x(f)$ of a Boolean function at a coordinate $x$ is the conditional entropy of the event $x\in U$
+given $U\setminus\{x\}$, where $U$ is drawn from the spectral distribution, and it never exceeds the binary entropy of
+the influence $\Inf_x(f)$. We study an explicit monotone function on $2k+1$ variables in which one coordinate $x$ is
+the only variable lying both in a shortest minterm and in a shortest maxterm. It is obtained from a majority function
+with one hidden coordinate by replacing half of the majority's inputs with the OR of two fresh variables and the other
+half with the AND of two. We prove that $E_x/\Inf_x=(1+o(1))\log_2(1/\Inf_x)=(1+o(1))(k-1)\log_2\frac43$, so the
+ratio at the forced coordinate grows linearly in $k$ and is asymptotic to its largest possible value. The proof writes
+the relevant biased Fourier coefficients of the majority as integrals over the unit circle, on which the integrand has
+an explicit modulus with a single pair of peaks, and uses that the phase advances by $\arccos\frac13$, an irrational
+multiple of $\pi$, from one class of coefficients to the next.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ and let $U$ be a random subset with
+$\Pr[U=S]=\hat f(S)^2$. The Fourier entropy-influence conjecture of Friedgut and Kalai~\cite{FK96} asks for an absolute
+$C$ with $H(U)\le C\,\E|U|$. The erasure entropy of $f$ at a coordinate $x$ is
+\[
+E_x(f)=H\bigl(\mathbf 1[x\in U]\bigm|U\setminus\{x\}\bigr),
+\]
+and with $\Inf_x(f)=\Pr[x\in U]$ the conjecture holds if and only if
+\[
+\sup_f\ \min_{x:\,\Inf_x(f)>0}\frac{E_x(f)}{\Inf_x(f)}
+\]
+is finite~\cite{Shm1}. Since conditioning does not increase entropy,
+\begin{equation}\label{eq:upper}
+\frac{E_x(f)}{\Inf_x(f)}\le\frac{h_2(\Inf_x(f))}{\Inf_x(f)}\le\log_2\frac{e}{\Inf_x(f)}
+\end{equation}
+for every $f$ and $x$ with $\Inf_x(f)>0$.
+
+Which coordinate to take is the difficulty. In~\cite{Shm8} several natural selection rules are shown to fail on monotone
+functions, among them the rule that takes, among the variables lying both in a shortest minterm and in a shortest
+maxterm, one of smallest ratio. For that rule the counterexample is a family $F_{k,t}$ in which a coordinate $x$ is the
+only variable of both kinds, and the ratio at $x$ is unbounded when $k$ and $t$ grow together; for fixed $t$ the
+question was left open. Here we settle the smallest case $t=1$, which is the simplest member of the family, and find
+the exact rate of growth.
+
+Fix an odd $k=2m+1$ and let $y^0\in\{0,1\}^k$ be the point with $y^0_j=1$ for $j\le m$ and $y^0_j=0$ for $j>m$,
+and $y^1=y^0+e_{m+1}$. Let $M$ be the majority function $\MAJ_k$ with the point $y^1$ removed from its true set, and
+\[
+\tilde f_k(y,x)=M(y)\vee\bigl(x\wedge[y\ge y^0]\bigr).
+\]
+Let $F_k$ be the function of $2k+1$ variables obtained from $\tilde f_k$ by replacing $y_j$ with the OR of two fresh
+variables for $j\le m$ and with the AND of two fresh variables for $j>m$. It is the function $F_{k,1}$
+of~\cite[Section~5]{Shm8}; it is monotone, and $x$ is the only variable that lies both in a shortest minterm and in a
+shortest maxterm of $F_k$~\cite[Section~5]{Shm8}.
+
+\begin{theorem}\label{thm:main}
+$\Inf_x(F_k)=(3/4)^{k-1}$ and, as $k\to\infty$ through odd values,
+\[
+\frac{E_x(F_k)}{\Inf_x(F_k)}=(1+o(1))\log_2\frac1{\Inf_x(F_k)}=(1+o(1))\,(k-1)\log_2\frac43 .
+\]
+\end{theorem}
+
+The upper half of the theorem is~\eqref{eq:upper}. The exact values computed in Section~\ref{sec:num} approach the
+bound slowly: the quotient of the ratio by $(k-1)\log_2\frac43$ is $0.80$ at $k=21$, $0.88$ at $k=81$ and $0.90$ at
+$k=141$.
+
+\section{The ratio as a double sum}\label{sec:sum}
+
+All logarithms are to base $2$ unless written $\ln$. For $p,q\ge0$ let $\Phi(p,q)=p\log\frac{p+q}{p}+q\log\frac{p+q}{q}$,
+with $\Phi(p,0)=\Phi(0,q)=0$, and $\Psi(r)=\Phi(r^2,1)$ for $r\ge0$. Then $\Psi\ge0$, and $\Psi(r)\ge\log r^2$ for
+$r\ge1$, since both terms of $\Phi$ are nonnegative and $(r^2+1)/1\ge r^2$.
+
+Put $P=\frac34$ and $q=\frac14$. The OR of two uniform bits is true with probability $P$ and the AND with probability
+$q$. By the proof of~\cite[Proposition~12]{Shm8}, $E_x(F_k)$ and $\Inf_x(F_k)$ are the erasure entropy and the
+influence of $x$ for the law $c(S)^2$, where $c(S)$ are the coefficients of $\tilde f_k$, in $\pm1$ values, in the
+orthonormal basis $\prod_{j\in S}\phi_j(y_j)$ (times $2x-1$ when $x\in S$) of the product measure on $(y,x)$ with
+$\Pr[y_j=1]=\mu_j$ and $x$ uniform; here $\mu_j=P$ for $j\le m$, $\mu_j=q$ for $j>m$, and
+$\phi_j(y)=(y-\mu_j)/\sigma$ with $\sigma=\sqrt{Pq}=\sqrt3/4$.
+
+With $+1$ for true, $\tilde f_k=\bar A+(2x-1)D$, where
+\[
+D=\mathbf 1[y=y^0]+\mathbf 1[y=y^1],\qquad \bar A=2N-1+\mathbf 1[y=y^0]-\mathbf 1[y=y^1],
+\]
+and $N=\mathbf 1[|y|\ge m+1]$. For $S\subseteq[k]$ write $u=|S\cap\{1,\dots,m\}|$ and $v=|S\cap\{m+2,\dots,k\}|$, and
+let $\hat g(S)$ denote the coefficient of $g$ at $\prod_{j\in S}\phi_j$. Put
+\[
+X(z)=q+Pz,\qquad Y(z)=P+qz,\qquad H_{uv}(z)=(z-1)^{u+v}X(z)^{m-u}Y(z)^{m+1-v}.
+\]
+
+\begin{lemma}\label{lem:coef}
+If $m+1\in S$ then $\hat D(S)=0$. If $m+1\notin S$ then
+\[
+\hat D(S)=(-1)^v\sigma^{u+v}P^{2m-u-v},\qquad
+\hat{\bar A}(S)=2\sigma^{u+v}t_{uv}-\mathbf 1[S=\emptyset]+\tfrac12\hat D(S),
+\]
+where
+\[
+t_{uv}=\sum_{c\ge m+1}[z^c]H_{uv}(z).
+\]
+\end{lemma}
+
+\begin{proof}
+For a point $w$, $\widehat{\mathbf 1[y=w]}(S)=\Pr[y=w]\prod_{j\in S}\phi_j(w_j)$. For $j\le m$, $y^0_j=1$ and
+$\phi_j(1)=q/\sigma=\sqrt{q/P}$; for $j\ge m+2$, $y^0_j=0$ and $\phi_j(0)=-q/\sigma=-\sqrt{q/P}$. The points $y^0$
+and $y^1$ differ only at $m+1$, where $\mu_{m+1}=q$, so $\Pr[y=y^0]=P^{2m+1}$ and $\Pr[y=y^1]=P^{2m}q$. If $m+1\in S$
+the two terms of $\hat D(S)$ carry the factors $P^{2m+1}\phi_{m+1}(0)=-P^{2m}\sqrt{Pq}$ and
+$P^{2m}q\,\phi_{m+1}(1)=P^{2m}\sqrt{Pq}$, which cancel. Otherwise both points give the same product
+$(-1)^v(q/P)^{(u+v)/2}$, so $\hat D(S)=P^{2m}(-1)^v(q/P)^{(u+v)/2}=(-1)^v\sigma^{u+v}P^{2m-u-v}$ and
+$\widehat{\mathbf 1[y=y^0]}(S)-\widehat{\mathbf 1[y=y^1]}(S)=(P-q)\hat D(S)=\frac12\hat D(S)$. Finally
+$\E[z^{y_j}\phi_j(y_j)]=\mu_jz(1-\mu_j)/\sigma-(1-\mu_j)\mu_j/\sigma=\sigma(z-1)$ and $\E[z^{y_j}]=1-\mu_j+\mu_jz$, so
+by independence $\E[z^{|y|}\prod_{j\in S}\phi_j(y_j)]=\sigma^{u+v}H_{uv}(z)$ when $m+1\notin S$, and $\hat N(S)$ is the
+sum of its coefficients at $z^c$, $c\ge m+1$.
+\end{proof}
+
+Let $\beta_u=\binom mu q^uP^{m-u}$ be the binomial law with parameters $m$ and $q$, and for $0\le u,v\le m$ put
+\[
+r_{uv}=\frac{\bigl|2t_{uv}-\mathbf 1[u=v=0]+\frac12(-1)^vP^{2m-u-v}\bigr|}{P^{2m-u-v}}.
+\]
+
+\begin{lemma}\label{lem:sum}
+$\Inf_x(F_k)=P^{2m}=(3/4)^{k-1}$ and
+\[
+\frac{E_x(F_k)}{\Inf_x(F_k)}=\sum_{u,v=0}^m\beta_u\beta_v\,\Psi(r_{uv}).
+\]
+\end{lemma}
+
+\begin{proof}
+By the reduction above, $E_x=\sum_S\Phi(\hat{\bar A}(S)^2,\hat D(S)^2)$ and $\Inf_x=\sum_S\hat D(S)^2$, the sums over
+$S\subseteq[k]$; the terms with $m+1\in S$ vanish. There are $\binom mu\binom mv$ sets with given $u,v$ and $m+1\notin
+S$, and $\sum_{u,v}\binom mu\binom mv(Pq)^{u+v}P^{2(2m-u-v)}=(Pq+P^2)^{2m}=P^{2m}$. By homogeneity
+$\Phi(\hat{\bar A}^2,\hat D^2)=\hat D^2\,\Psi(|\hat{\bar A}|/|\hat D|)$, the quotient $|\hat{\bar A}(S)|/|\hat D(S)|$ is
+$r_{uv}$ by Lemma~\ref{lem:coef}, and $\binom mu\binom mv(Pq)^{u+v}P^{2(2m-u-v)}/P^{2m}=\beta_u\beta_v$.
+\end{proof}
+
+So $E_x/\Inf_x$ is the mean of $\Psi(r_{uv})$ when $u$ and $v$ are independent binomial variables with parameters $m$ and
+$\frac14$. Most of that law sits near $u=v=m/4$, and the theorem says that there $\log r_{uv}^2$ is close to
+$2m\log\frac43$ for almost all $(u,v)$. The difficulty is that $t_{uv}$ is a sum of terms of both signs; we show that it
+oscillates, in $u$, like the cosine of an irrational rotation times an exponentially large envelope.
+
+\section{The tail on the unit circle}\label{sec:circle}
+
+\begin{lemma}\label{lem:integral}
+If $u+v\ge1$ then $Q_{uv}=H_{uv}/(z-1)$ is a polynomial and
+\[
+t_{uv}=[z^m]\,Q_{uv}(z)=\frac1{2\pi}\int_{-\pi}^{\pi}Q_{uv}(e^{\ii\theta})\,e^{-\ii m\theta}\,d\theta .
+\]
+\end{lemma}
+
+\begin{proof}
+Write $Q_{uv}=\sum_cg_cz^c$. Then $[z^c]H_{uv}=g_{c-1}-g_c$, and the sum over $c\ge m+1$ telescopes to $g_m$ because
+$Q_{uv}$ has degree one less than $H_{uv}$. The integral is Cauchy's formula on $|z|=1$.
+\end{proof}
+
+On the circle the three factors of $Q_{uv}$ have explicit moduli. For $z=e^{\ii\theta}$ and $w=\cos\theta$,
+\[
+|z-1|^2=2-2w,\qquad |X(z)|^2=|Y(z)|^2=q^2+P^2+2Pqw=\frac{5+3w}8 .
+\]
+Put $n_1=u+v-1$ and $n_2=2m+1-u-v$, so that $n_1+n_2=2m$. Then $|Q_{uv}(e^{\ii\theta})|=e^{\rho(\cos\theta)}$ with
+\[
+\rho(w)=\frac{n_1}2\ln(2-2w)+\frac{n_2}2\ln\frac{5+3w}8,\qquad
+\rho''(w)=-\frac{n_1}{2(1-w)^2}-\frac{9n_2}{2(5+3w)^2}\le-\frac{9n_2}{128}.
+\]
+So $\rho$ is strictly concave on $[-1,1)$; its maximum is at $w_0=(3n_2-5n_1)/(6m)$ when this lies in $(-1,1)$, and a
+short computation gives $2-2w_0=8n_1/(3m)$, $(5+3w_0)/8=n_2/(2m)$, hence
+\begin{equation}\label{eq:peak}
+\rho(w_0)=\frac{n_1}2\ln\frac{8n_1}{3m}+\frac{n_2}2\ln\frac{n_2}{2m}.
+\end{equation}
+At $u=v=m/4$ one has $n_1\approx m/2$, $w_0\approx\frac13$ and $e^{\rho(w_0)}\approx(\sqrt3/2)^m$.
+
+For $\lambda\ge1$ let $W_\lambda$ be the set of $(u,v)$ with $|u-m/4|\le\lambda\sqrt m$ and $|v-m/4|\le\lambda\sqrt m$.
+In what follows $c,C$ denote positive constants that may depend on $\lambda$ but not on $m$ or on $(u,v)\in W_\lambda$,
+and $m$ is large enough for each statement. On $W_\lambda$, $n_1=m/2+O(\sqrt m)$ and $w_0=\frac13+O(m^{-1/2})$; put
+$\theta_0=\arccos w_0$, $\theta^*=\arccos\frac13$ and $z_0=e^{\ii\theta_0}$.
+
+\begin{lemma}\label{lem:exponent}
+On $W_\lambda$, $\rho(w_0)+(n_2-1)\ln\frac43\ge(m-1)\ln\frac43$.
+\end{lemma}
+
+\begin{proof}
+Regard the left side, by~\eqref{eq:peak}, as a function $G(n_1)$ of a real variable $n_1\in(0,2m)$, with $n_2=2m-n_1$.
+Then $G'(n_1)=\frac12\ln\frac{16n_1}{3n_2}-\ln\frac43$, which vanishes at $n_1=m/2$, and
+$G''(n_1)=\frac1{2n_1}+\frac1{2n_2}>0$. So $G$ is convex with its minimum at $m/2$, and
+$G(m/2)=\frac m4\ln\frac43+\frac{3m}4\ln\frac34+(\frac{3m}2-1)\ln\frac43=(m-1)\ln\frac43$.
+\end{proof}
+
+Fix $(u,v)\in W_\lambda$ and let $\Lambda(\theta)=\ln Q_{uv}(e^{\ii\theta})-\ii m\theta$, for complex $\theta$ with
+$|\theta-\theta^*|\le\delta$, where $\delta>0$ is so small that $e^{\ii\theta}$ stays away from $1$, $-\frac13$ and $-3$,
+the zeros of $z-1$, $X$ and $Y$; the logarithm is the branch continuous in this disc. Since $\Lambda$ is a sum of at most
+$2m+1$ logarithms of functions analytic and nonvanishing there, plus a linear term, $|\Lambda''|$ and $|\Lambda'''|$ are
+at most $Cm$ on the disc. For real $\theta$, $\mathrm{Re}\,\Lambda(\theta)=\rho(\cos\theta)$, so
+$\mathrm{Re}\,\Lambda'(\theta_0)=-\rho'(w_0)\sin\theta_0=0$ and
+$\mathrm{Re}\,\Lambda''(\theta_0)=\rho''(w_0)\sin^2\theta_0\le-cm$. Put
+\[
+b=\mathrm{Im}\,\Lambda'(\theta_0),\qquad A=-\Lambda''(\theta_0),\qquad
+T_{uv}=\frac{1}{\sqrt{2\pi A}}\exp\Bigl(\Lambda(\theta_0)-\frac{b^2}{2A}\Bigr),
+\]
+with the principal square root ($\mathrm{Re}\,A>0$).
+
+\begin{lemma}\label{lem:laplace}
+On $W_\lambda$: $|b|\le C\sqrt m$, $|T_{uv}|\ge c\,m^{-1/2}e^{\rho(w_0)}$, and
+$t_{uv}=2\,\mathrm{Re}\,T_{uv}+O(|T_{uv}|\,m^{-1/5})$.
+\end{lemma}
+
+\begin{proof}
+Write $a=u/m$, $a'=v/m$. Then $\Lambda'(\theta)/m$ differs by $O(1/m)$ from
+$\ii z\bigl(\frac{a+a'}{z-1}+\frac{(1-a)P}{X}+\frac{(1-a')q}{Y}\bigr)-\ii$ at $z=e^{\ii\theta}$, which is a smooth
+function of $(a,a',\theta)$ and vanishes at $a=a'=\frac14$, $\theta=\theta^*$: there $z^*=e^{\ii\theta^*}=\frac13+\frac{2\sqrt2}3\ii$, and
+$\frac{1}{2(z^*-1)}+\frac{9}{16X(z^*)}+\frac{3}{16Y(z^*)}=\frac1{z^*}$, as one checks from $X(z^*)=\frac12+\frac{\sqrt2}2\ii$
+and $Y(z^*)=\frac56+\frac{\sqrt2}6\ii$. Since $a-\frac14$, $a'-\frac14$ and $\theta_0-\theta^*$ are $O(m^{-1/2})$,
+$|\Lambda'(\theta_0)|\le C\sqrt m$, which bounds $b$. Next, $\mathrm{Re}(b^2/A)=b^2\,\mathrm{Re}A/|A|^2\le C$, so
+$|T_{uv}|\ge c\,|A|^{-1/2}|e^{\Lambda(\theta_0)}|\ge c\,m^{-1/2}e^{\rho(w_0)}$.
+
+By Lemma~\ref{lem:integral}, $t_{uv}=\frac1{2\pi}\int_{-\pi}^\pi e^{\Lambda(\theta)}d\theta$, the integrand being
+$Q_{uv}(e^{\ii\theta})e^{-\ii m\theta}$ on the whole circle. Split the interval into $J_+=\{|\theta-\theta_0|\le
+m^{-2/5}\}$, $J_-=-J_+$ and the rest. On $J_+$, with $\theta=\theta_0+h$,
+$\Lambda(\theta)=\Lambda(\theta_0)+\ii bh-\frac12Ah^2+R(h)$ with $|R(h)|\le Cm|h|^3\le Cm^{-1/5}$. Hence
+\[
+\frac1{2\pi}\int_{J_+}e^{\Lambda}=\frac{e^{\Lambda(\theta_0)}}{2\pi}\Bigl(\int_{\mathbb R}e^{\ii bh-Ah^2/2}dh
+-\int_{|h|>m^{-2/5}}e^{\ii bh-Ah^2/2}dh\Bigr)+O\Bigl(e^{\rho(w_0)}m^{-1/5}\int_{\mathbb R}e^{-cmh^2}dh\Bigr).
+\]
+The first integral is $\sqrt{2\pi/A}\,e^{-b^2/(2A)}$, which makes the first term $T_{uv}$; the second is at most
+$Ce^{-cm^{1/5}}$; the error term is $O(e^{\rho(w_0)}m^{-1/2-1/5})=O(|T_{uv}|m^{-1/5})$. The coefficients of $Q_{uv}$
+are real, so the integral over $J_-$ is the complex conjugate. Off $J_+\cup J_-$, for $\theta\in[0,\pi]$,
+$|\cos\theta-\cos\theta_0|=2\sin\frac{\theta+\theta_0}2\,\bigl|\sin\frac{\theta-\theta_0}2\bigr|\ge c|\theta-\theta_0|$
+because $\theta_0$ stays away from $0$ and $\pi$, and likewise for $\theta\in[-\pi,0]$; since $\rho'(w_0)=0$ and
+$\rho''\le-9n_2/128\le-cm$, the integrand there has modulus at most
+$e^{\rho(w_0)-cm(\cos\theta-w_0)^2}\le e^{\rho(w_0)-cm^{1/5}}$, which is $O(|T_{uv}|m^{-1/5})$ after integration.
+\end{proof}
+
+\begin{lemma}\label{lem:phase}
+Let $\alpha=\arccos\frac13$. If $(u,v)$ and $(u+1,v)$ lie in $W_\lambda$, then
+$\arg T_{u+1,v}-\arg T_{uv}=\alpha+O(m^{-1/2})$ modulo $2\pi$.
+\end{lemma}
+
+\begin{proof}
+Let $g(z)=(z-1)/X(z)$, so that $Q_{u+1,v}=gQ_{uv}$, and denote by $\Lambda^+$, $\theta_0^+$, $b^+$, $A^+$ the
+quantities for $(u+1,v)$. Here $\Lambda^+=\Lambda+\ln g(e^{\ii\theta})$, and $w_0$ changes by $-4/(3m)$, so
+$\theta_0^+-\theta_0=O(1/m)$. Hence
+\[
+\Lambda^+(\theta_0^+)-\Lambda(\theta_0)=\ln g(z_0)+\Lambda'(\theta_0)(\theta_0^+-\theta_0)+O(1/m)=\ln g(z_0)+O(m^{-1/2})
+\]
+by Lemma~\ref{lem:laplace}. Similarly $A^+-A=O(1)$ and $b^+-b=O(1)$, so $\arg A$ moves by $O(1/m)$ and $b^2/(2A)$ by
+$O(|b|/m+b^2/m^2)=O(m^{-1/2})$. So $\arg T$ moves by $\mathrm{Im}\ln g(z_0)+O(m^{-1/2})$. Finally
+$g(z^*)=\frac43z^*$, as $(z^*-1)\overline{X(z^*)}=\frac13+\frac{2\sqrt2}3\ii$ and $|X(z^*)|^2=\frac34$; thus
+$\arg g(z^*)=\theta^*=\alpha$, and $z_0-z^*=O(m^{-1/2})$.
+\end{proof}
+
+The number $\alpha/\pi$ is irrational: by Niven's theorem~\cite{Niv}, if $\alpha/\pi$ is rational and $\cos\alpha$ is
+rational then $\cos\alpha\in\{0,\pm\frac12,\pm1\}$.
+
+\section{Proof of the theorem}\label{sec:proof}
+
+The equality $\Inf_x(F_k)=(3/4)^{k-1}$ is Lemma~\ref{lem:sum}, and the upper bound is~\eqref{eq:upper}. For the lower
+bound fix $\varepsilon\in(0,\frac14)$, $\lambda\ge1$ and an integer $L\ge1$. Since $\alpha/\pi$ is irrational, the
+sequence $\ell\alpha/\pi$ is equidistributed modulo~$1$ (Weyl), with discrepancy tending to $0$; the set of $\psi$
+modulo $\pi$ with $|\cos\psi|<2\varepsilon$ is an interval of length $2\arcsin2\varepsilon\le2\pi\varepsilon$. So we may
+take $L$ so large that for every real $\psi_0$ at most $3\varepsilon L$ of the numbers $\ell=0,\dots,L-1$ satisfy
+$|\cos(\psi_0+\ell\alpha)|<2\varepsilon$.
+
+Fix $v$ and cut the set of $u$ with $(u,v)\in W_\lambda$ into consecutive blocks of $L$ values, leaving at most $L-1$
+values over. In a block starting at $u_0$, Lemma~\ref{lem:phase} gives
+$\arg T_{u_0+\ell,v}=\arg T_{u_0,v}+\ell\alpha+O(Lm^{-1/2})$ for $\ell<L$, and for $m$ large the error is below
+$\varepsilon$, so at most $3\varepsilon L$ values of $u$ in the block have $|\cos\arg T_{uv}|<\varepsilon$. On
+$W_\lambda$, $\beta_{u+1}/\beta_u=(m-u)/(3(u+1))=1+O(m^{-1/2})$, so the weights $\beta_u$ in a block differ by a factor
+at most $2$ for $m$ large, and the bad values carry at most $6\varepsilon$ of the block's weight. The left-over values
+carry weight at most $(L-1)\max_u\beta_u=O(Lm^{-1/2})$ in each row. Summing over $v$, the pairs $(u,v)\in W_\lambda$ with
+$|\cos\arg T_{uv}|<\varepsilon$, together with the left-over ones, have $\beta_u\beta_v$-weight at most
+$6\varepsilon+o(1)$.
+
+Let $(u,v)\in W_\lambda$ have $|\cos\arg T_{uv}|\ge\varepsilon$. By Lemma~\ref{lem:laplace},
+$|t_{uv}|\ge2\varepsilon|T_{uv}|-C|T_{uv}|m^{-1/5}\ge\varepsilon|T_{uv}|\ge c\varepsilon m^{-1/2}e^{\rho(w_0)}$, and
+$(u,v)\ne(0,0)$. With $2m-u-v=n_2-1$ and Lemma~\ref{lem:exponent},
+\[
+r_{uv}\ge\frac{2|t_{uv}|}{P^{n_2-1}}-\frac12\ge c\varepsilon m^{-1/2}\Bigl(\frac43\Bigr)^m-\frac12,
+\]
+which exceeds $1$ for $m$ large, and then $\Psi(r_{uv})\ge\log r_{uv}^2\ge2m\log\frac43-\log m-C_\varepsilon$. By
+Chebyshev's inequality $\Pr[|u-m/4|>\lambda\sqrt m]\le\frac{3}{16\lambda^2}$, so $W_\lambda$ has weight at least
+$(1-\frac3{16\lambda^2})^2$. Since $\Psi\ge0$, Lemma~\ref{lem:sum} gives
+\[
+\frac{E_x(F_k)}{\Inf_x(F_k)}\ge\Bigl(\bigl(1-\tfrac3{16\lambda^2}\bigr)^2-6\varepsilon-o(1)\Bigr)\Bigl(2m\log\frac43-\log
+m-C_\varepsilon\Bigr).
+\]
+As $2m=k-1$, dividing by $(k-1)\log\frac43$ and letting $m\to\infty$, then $\lambda\to\infty$ and $\varepsilon\to0$,
+gives $\liminf\ge1$. \qed
+
+\begin{remark}
+In $v$ the factor is $(z-1)/Y$, and $(z^*-1)/Y(z^*)=\frac43(-\frac13+\frac{2\sqrt2}3\ii)$, so the phase step is
+$\pi-\alpha$ and the step from $(u,v)$ to $(u+1,v+1)$ is $\pi$: to first order the sign of $t_{uv}$ alternates along
+diagonals. The ratio is not monotone in $k$; it falls from $52.59$ at $k=133$ to $50.32$ at $k=135$
+(Section~\ref{sec:num}).
+\end{remark}
+
+\section{Numerical checks}\label{sec:num}
+
+Lemma~\ref{lem:sum} turns the ratio into a double sum of $(m+1)^2$ terms whose ingredients are integers over powers of
+$4$, so it can be evaluated exactly in rational arithmetic. The ratio $R_k=E_x(F_k)/\Inf_x(F_k)$ and the quotient
+$R_k/((k-1)\log\frac43)$ are:
+\begin{center}
+\begin{tabular}{rrr@{\qquad}rrr}
+$k$ & $R_k$ & quotient & $k$ & $R_k$ & quotient\\ \hline
+$21$ & $6.631$ & $0.799$ & $101$ & $37.249$ & $0.898$\\
+$41$ & $13.826$ & $0.833$ & $121$ & $45.334$ & $0.910$\\
+$61$ & $21.448$ & $0.861$ & $133$ & $52.589$ & $0.960$\\
+$81$ & $29.311$ & $0.883$ & $141$ & $52.344$ & $0.901$
+\end{tabular}
+\end{center}
+For $k=3,5,7,9$ the values $1.0512$, $1.8769$, $2.5690$, $3.1179$ agree to $10^{-9}$ with the ratio computed from the
+full Walsh--Hadamard transform of $F_k$ on $7$, $11$, $15$ and $19$ variables, which also confirms that $x$ is the
+only variable in both a shortest minterm and a shortest maxterm. The Laplace approximation of
+Lemma~\ref{lem:laplace} was compared with the exact $t_{uv}$ over all of $W_1$: the largest error relative to
+$|T_{uv}|$ is $0.149$, $0.095$ and $0.071$ at $k=41$, $81$ and $141$, about $0.6\,m^{-1/2}$. A scan of
+$|Q_{uv}(e^{\ii\theta})|$ for $n_1/m\in[0.4,0.6]$ finds no local maximum on $(0,\pi)$ other than $\theta_0$.
+
+\section*{Acknowledgements and funding}
+This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math
+Brain~\cite{MathBrainRepo} and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent
+memory in which the agents record claims, proofs, failed attempts and methods, retrieve one another's results,
+coordinate who works on what, and audit each other's work. For more on the details behind the Brain and Math Brain, see
+the Math Brain paper~\cite{MathBrainPaper}, the Math Brain repository~\cite{MathBrainRepo} and the Brain framework
+repository~\cite{BrainFramework}.
+
+The research presented in this paper was supported by the European Research Council (ERC) under the European Union's
+Horizon Europe research and innovation programme (grant agreement No.~101041711), by the Simons Foundation as part of
+the Collaboration on the Mathematical and Scientific Foundations of Deep Learning, by Heights Labs, by Convex Nexus
+Capital, by the Israel Science Foundation (grant number 2258/19), and by the Israel Science Foundation (ISF Grant
+4101/25). Computational resources were provided in part by Google Cloud through its education credits program (credit
+530550103).
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital.
+These entities are included in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+The paper comes out of Math Brain, an ongoing project on the use of AI systems for research mathematics, and its
+results were developed with the Brain~\cite{BrainFramework} and Math Brain~\cite{MathBrainRepo}. The family $F_{k,t}$
+is from~\cite{Shm8}. Claude Opus 5.5 (Anthropic) found Theorem~\ref{thm:main} and its proof, wrote the numerical
+checks and prepared the manuscript. These checks are not peer review. The author directed the work and is responsible
+for the content of the paper and for decisions concerning its dissemination.
+
+\section*{Code and data availability}
+Code and outputs: \url{https://github.com/yspennstate/fei-forced-coordinate}.
+
+The paper is part of the Math Brain project, whose public repository is
+\url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\begin{thebibliography}{99}
+\bibitem{FK96} E.~Friedgut, G.~Kalai, Every monotone graph property has a sharp threshold, Proc. Amer. Math. Soc.
+124 (1996), 2993--3002.
+\bibitem{Niv} I.~Niven, \emph{Irrational Numbers}, Carus Mathematical Monographs 11, Mathematical Association of
+America, 1956, Corollary~3.12.
+\bibitem{Shm1} Y.~Shmalo, The one-coordinate step in the Fourier entropy-influence conjecture,
+\url{https://github.com/yspennstate/fourier-entropy-influence-one-coordinate}, 2026.
+\bibitem{Shm8} Y.~Shmalo, Hidden coordinates and selection rules in the Fourier entropy-influence conjecture,
+\url{https://github.com/yspennstate/fei-hidden-coordinates}, 2026.
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
+\url{https://github.com/yspennstate/math-brain-public}.
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research},
+October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026,
+\url{https://github.com/yspennstate/brain-framework-public}.
+\end{thebibliography}
+
+\end{document}
