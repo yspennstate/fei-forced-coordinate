@@ -27,8 +27,8 @@ The erasure entropy $E_x(f)$ of a Boolean function at a coordinate $x$ is the co
 given $U\setminus\{x\}$, where $U$ is drawn from the spectral distribution, and it never exceeds the binary entropy of
 the influence $\Inf_x(f)$. We study an explicit monotone function on $2k+1$ variables in which one coordinate $x$ is
 the only variable lying both in a shortest minterm and in a shortest maxterm. It is obtained from a majority function
-with one hidden coordinate by replacing half of the majority's inputs with the OR of two fresh variables and the other
-half with the AND of two. We prove that $E_x/\Inf_x=(1+o(1))\log_2(1/\Inf_x)=(1+o(1))(k-1)\log_2\frac43$, so the
+with one hidden coordinate by replacing $(k-1)/2$ of the majority's $k$ inputs with the OR of two fresh variables and
+the other $(k+1)/2$ with the AND of two. We prove that $E_x/\Inf_x=(1+o(1))\log_2(1/\Inf_x)=(1+o(1))(k-1)\log_2\frac43$, so the
 ratio at the forced coordinate grows linearly in $k$ and is asymptotic to its largest possible value. The proof writes
 the relevant biased Fourier coefficients of the majority as integrals over the unit circle, on which the integrand has
 an explicit modulus with a single pair of peaks, and uses that the phase advances by $\arccos\frac13$, an irrational
@@ -63,9 +63,8 @@ for every $f$ and $x$ with $\Inf_x(f)>0$.
 Which coordinate to take is the difficulty. In~\cite{Shm8} several natural selection rules are shown to fail on monotone
 functions, among them the rule that takes, among the variables lying both in a shortest minterm and in a shortest
 maxterm, one of smallest ratio. For that rule the counterexample is a family $F_{k,t}$ in which a coordinate $x$ is the
-only variable of both kinds, and the ratio at $x$ is unbounded when $k$ and $t$ grow together; for fixed $t$ the
-question was left open. Here we settle the smallest case $t=1$, which is the simplest member of the family, and find
-the exact rate of growth.
+only variable of both kinds, and the ratio at $x$ is unbounded when $k$ and $t$ grow together. Here we treat the smallest case $t=1$, the simplest member of the family, and
+find the exact rate of growth; the extension to every fixed $t$ and to every rational bias is in~\cite{Shm10}.
 
 Fix an odd $k=2m+1$ and let $y^0\in\{0,1\}^k$ be the point with $y^0_j=1$ for $j\le m$ and $y^0_j=0$ for $j>m$,
 and $y^1=y^0+e_{m+1}$. Let $M$ be the majority function $\MAJ_k$ with the point $y^1$ removed from its true set, and
@@ -86,7 +85,7 @@ $\Inf_x(F_k)=(3/4)^{k-1}$ and, as $k\to\infty$ through odd values,
 
 The upper half of the theorem is~\eqref{eq:upper}. The exact values computed in Section~\ref{sec:num} approach the
 bound slowly: the quotient of the ratio by $(k-1)\log_2\frac43$ is $0.80$ at $k=21$, $0.88$ at $k=81$ and $0.92$ at
-$k=141$, increasing in $k$ over the computed range.
+$k=141$, increasing along the table, though not monotone in $k$ (its smallest value, $0.796$, is at $k=19$).
 
 \section{The ratio as a double sum}\label{sec:sum}
 
@@ -319,7 +318,7 @@ diagonals.
 
 Lemma~\ref{lem:sum} turns the ratio into a double sum of $(m+1)^2$ terms whose ingredients are integers over powers of
 $4$, so the coefficients can be computed exactly in rational arithmetic; each term of $\Phi$ is then evaluated as
-$p\log(1+q/p)$ with a $\log(1+\cdot)$ routine, since $p/q$ reaches $10^{17}$ for $k$ above $120$. The ratio $R_k=E_x(F_k)/\Inf_x(F_k)$ and the quotient
+$p\log(1+q/p)$ with a $\log(1+\cdot)$ routine, since $p/q$ exceeds $10^{17}$ from $k=35$ on and is about $2\cdot10^{69}$ at $k=121$. The ratio $R_k=E_x(F_k)/\Inf_x(F_k)$ and the quotient
 $R_k/((k-1)\log\frac43)$ are:
 \begin{center}
 \begin{tabular}{rrr@{\qquad}rrr}
@@ -334,8 +333,8 @@ For $k=3,5,7,9$ the values $1.0512$, $1.8769$, $2.5690$, $3.1179$ agree to $10^{
 full Walsh--Hadamard transform of $F_k$ on $7$, $11$, $15$ and $19$ variables, which also confirms that $x$ is the
 only variable in both a shortest minterm and a shortest maxterm. The Laplace approximation of
 Lemma~\ref{lem:laplace} was compared with the exact $t_{uv}$ over all of $W_1$: the largest error relative to
-$|T_{uv}|$ is $0.149$, $0.095$ and $0.071$ at $k=41$, $81$ and $141$, about $0.6\,m^{-1/2}$. A scan of
-$|Q_{uv}(e^{\ii\theta})|$ for $n_1/m\in[0.4,0.6]$ finds no local maximum on $(0,\pi)$ other than $\theta_0$.
+$|T_{uv}|$ is $0.149$, $0.095$ and $0.071$ at $k=41$, $81$ and $141$, about $0.6\,m^{-1/2}$. Since $\rho$ is strictly concave and $\cos$ is decreasing on $(0,\pi)$,
+$|Q_{uv}(e^{\ii\theta})|=e^{\rho(\cos\theta)}$ has no local maximum on $(0,\pi)$ other than $\theta_0$.
 
 \section*{Acknowledgements and funding}
 This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math
@@ -403,6 +402,8 @@ America, 1956, Corollary~3.12.
 \url{https://github.com/yspennstate/fei-good-coordinates}, 2026.
 \bibitem{Shm8} Y.~Shmalo, Hidden coordinates and selection rules in the Fourier entropy-influence conjecture,
 \url{https://github.com/yspennstate/fei-hidden-coordinates}, 2026.
+\bibitem{Shm10} Y.~Shmalo, The erasure entropy of a forced coordinate under every bias,
+\url{https://github.com/yspennstate/fei-forced-coordinate-bias}, 2026.
 \bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
 \url{https://github.com/yspennstate/math-brain-public}.
 \bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research},
