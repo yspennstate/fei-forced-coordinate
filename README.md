@@ -48,6 +48,7 @@ All programs are Python 3; `forced_rule.py` and `check_gk.py` also need NumPy.
 6. [Erasure entropies of sparse linear DNFs](https://github.com/yspennstate/fei-sparse-linear-dnf)
 7. [The Fourier entropy of linear monotone DNFs on few variables](https://github.com/yspennstate/fei-linear-dnf-census)
 8. [Hidden coordinates and selection rules in the Fourier entropy-influence conjecture](https://github.com/yspennstate/fei-hidden-coordinates)
+9. [The erasure entropy of a forced coordinate under every bias](https://github.com/yspennstate/fei-forced-coordinate-bias)
 
 ## License
 
