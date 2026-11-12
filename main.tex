@@ -44,10 +44,12 @@ multiple of $\pi$, from one class of coefficients to the next.
 
 For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ and let $U$ be a random subset with
 $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy-influence conjecture of Friedgut and Kalai~\cite{FK96} asks for an absolute
-$C$ with $H(U)\le C\,\E|U|$. It is known for symmetric functions and read-once decision trees~\cite{OWZ}, it is
-preserved under suitable compositions~\cite{OT13}, and weaker forms and bounds with extra factors are
-in~\cite{CKLS,WWW,KKLMS,Han}, and Li and Han~\cite{LH25} make the constant in front of $\E|U|$ in Han's bound
-sharp; the conjecture holds for every linear threshold function~\cite{ShmLTF}; lower bounds on the best constant are in~\cite{OT13,Hod,MI26a,MI26b,Num26}, the largest being $6.5218$~\cite{Num26}. The erasure entropy of $f$ at a coordinate $x$ is
+$C$ with $H(U)\le C\,\E|U|$. It is known for symmetric functions and read-once decision trees~\cite{OWZ} and is
+preserved under suitable compositions~\cite{OT13}. Weaker forms and bounds with extra factors are
+in~\cite{CKLS,WWW,KKLMS,Han}. Li and Han~\cite{LH25} make the constant in front of $\E|U|$ in Han's bound
+sharp. The conjecture was proved for every linear threshold function in~\cite{ShmLTF}. The largest known lower bound
+on the best constant is $6.5218$~\cite{Num26}. Earlier bounds are due to O'Donnell and Tan~\cite{OT13}, Hod~\cite{Hod}
+and Mosaic Intelligence~\cite{MI26a,MI26b}. The erasure entropy of $f$ at a coordinate $x$ is
 \[
 E_x(f)=H\bigl(\mathbf 1[x\in U]\bigm|U\setminus\{x\}\bigr),
 \]
