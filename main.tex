@@ -1,6 +1,7 @@
 \documentclass[11pt]{amsart}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage[margin=1.1in]{geometry}
+\usepackage{array,longtable,booktabs}
 \usepackage{hyperref}
 \emergencystretch=2em
 
@@ -38,7 +39,7 @@ multiple of $\pi$, from one class of coefficients to the next.
 
 \maketitle
 
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 
 For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ and let $U$ be a random subset with
 $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy-influence conjecture of Friedgut and Kalai~\cite{FK96} asks for an absolute
@@ -91,8 +92,8 @@ $k=141$, increasing along the table, though not monotone in $k$ (its smallest va
 
 \section{The ratio as a double sum}\label{sec:sum}
 
-All logarithms are to base $2$ unless written $\ln$. For $p,q\ge0$ let $\Phi(p,q)=p\log\frac{p+q}{p}+q\log\frac{p+q}{q}$,
-with $\Phi(p,0)=\Phi(0,q)=0$, and $\Psi(r)=\Phi(r^2,1)$ for $r\ge0$. Then $\Psi\ge0$, and $\Psi(r)\ge\log r^2$ for
+All logarithms are to base $2$ unless written $\ln$. For $a,b\ge0$ let $\Phi(a,b)=a\log\frac{a+b}{a}+b\log\frac{a+b}{b}$,
+with $\Phi(a,0)=\Phi(0,b)=0$, and $\Psi(r)=\Phi(r^2,1)$ for $r\ge0$. Then $\Psi\ge0$, and $\Psi(r)\ge\log r^2$ for
 $r\ge1$, since both terms of $\Phi$ are nonnegative and $(r^2+1)/1\ge r^2$.
 
 Put $P=\frac34$ and $q=\frac14$. The OR of two uniform bits is true with probability $P$ and the AND with probability
@@ -320,7 +321,7 @@ diagonals.
 
 Lemma~\ref{lem:sum} turns the ratio into a double sum of $(m+1)^2$ terms whose ingredients are integers over powers of
 $4$, so the coefficients can be computed exactly in rational arithmetic; each term of $\Phi$ is then evaluated as
-$p\log(1+q/p)$ with a $\log(1+\cdot)$ routine, since $p/q$ exceeds $10^{17}$ from $k=35$ on and is about $2\cdot10^{69}$ at $k=121$. The ratio $R_k=E_x(F_k)/\Inf_x(F_k)$ and the quotient
+$a\log(1+b/a)$ with a $\log(1+\cdot)$ routine, since $a/b$ exceeds $10^{17}$ from $k=35$ on and is about $2\cdot10^{69}$ at $k=121$. The ratio $R_k=E_x(F_k)/\Inf_x(F_k)$ and the quotient
 $R_k/((k-1)\log\frac43)$ are:
 \begin{center}
 \begin{tabular}{rrr@{\qquad}rrr}
@@ -369,6 +370,61 @@ Code and outputs: \url{https://github.com/yspennstate/fei-forced-coordinate}.
 
 The paper is part of the Math Brain project, whose public repository is
 \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\appendix
+\section{Notation}\label{app:notation}
+
+Symbols are listed roughly in the order in which they first appear, and the last column gives that place. The letters
+$c$ and $g$ are reused, and each meaning has its own row.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.54\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}@{}}
+\toprule
+Symbol & Meaning & First appears \\
+\midrule
+\endhead
+$f$, $\hat f(S)$, $\chi_S$ & a Boolean function $\{0,1\}^n\to\{-1,1\}$, its Fourier coefficient at $S$, and the character at $S$ & Section~\ref{sec:intro} \\
+$n$ & the number of variables of $f$ & Section~\ref{sec:intro} \\
+$U$ & a random subset with $\Pr[U=S]=\hat f(S)^2$ & Section~\ref{sec:intro} \\
+$C$ & an absolute constant, as in $H(U)\le C\,\E|U|$ & Section~\ref{sec:intro} \\
+$x$ & a coordinate; for $F_k$, the coordinate lying in both a shortest minterm and a shortest maxterm & Section~\ref{sec:intro} \\
+$E_x(f)$, $\Inf_x(f)$ & the erasure entropy $H(\mathbf 1[x\in U]\mid U\setminus\{x\})$, and the influence $\Pr[x\in U]$ & Section~\ref{sec:intro} \\
+$h_2$ & the binary entropy & Section~\ref{sec:intro} \\
+$F_{k,t}$ & the family of monotone functions of~\cite[Section~5]{Shm8} & Section~\ref{sec:intro} \\
+$k$, $m$ & the odd number of inputs of the majority, and $m=(k-1)/2$ & Section~\ref{sec:intro} \\
+$y^0$, $y^1$ & the point of $\{0,1\}^k$ with ones exactly in the first $m$ places, and $y^0+e_{m+1}$ & Section~\ref{sec:intro} \\
+$\MAJ_k$, $M$ & the majority function on $k$ bits, and the same with $y^1$ removed from its true set & Section~\ref{sec:intro} \\
+$\tilde f_k$, $F_k$ & $M(y)\vee(x\wedge[y\ge y^0])$, and the function on $2k+1$ variables obtained from it by replacing each $y_j$ with an OR or an AND of two fresh variables & Section~\ref{sec:intro} \\
+$\Phi(a,b)$, $\Psi(r)$ & $a\log\frac{a+b}a+b\log\frac{a+b}b$, and $\Phi(r^2,1)$ & Section~\ref{sec:sum} \\
+$P$, $q$ & $\frac34$ and $\frac14$, the probabilities that an OR and an AND of two uniform bits are true & Section~\ref{sec:sum} \\
+$c(S)$ & the coefficients of $\tilde f_k$ in the biased basis & Section~\ref{sec:sum} \\
+$\mu_j$, $\phi_j$, $\sigma$ & the bias of $y_j$, the biased basis function $(y-\mu_j)/\sigma$, and $\sigma=\sqrt{Pq}$ & Section~\ref{sec:sum} \\
+$D$, $\bar A$, $N$ & the odd and even parts of $\tilde f_k$ in $x$, and the indicator $\mathbf 1[|y|\ge m+1]$ & Section~\ref{sec:sum} \\
+$u$, $v$ & $|S\cap\{1,\dots,m\}|$ and $|S\cap\{m+2,\dots,k\}|$ & Section~\ref{sec:sum} \\
+$\hat g(S)$ & the coefficient of a function $g$ at $\prod_{j\in S}\phi_j$ & Section~\ref{sec:sum} \\
+$z$ & a complex variable & Section~\ref{sec:sum} \\
+$X$, $Y$, $H_{uv}$ & $q+Pz$, $P+qz$, and $(z-1)^{u+v}X^{m-u}Y^{m+1-v}$ & Section~\ref{sec:sum} \\
+$[z^c]$, $t_{uv}$ & the coefficient of $z^c$, and $\sum_{c\ge m+1}[z^c]H_{uv}$ & Lemma~\ref{lem:coef} \\
+$\beta_u$, $r_{uv}$ & the binomial law $\binom mu q^uP^{m-u}$, and the quotient $|\hat{\bar A}(S)|/|\hat D(S)|$ for sets of type $(u,v)$ & Section~\ref{sec:sum} \\
+$Q_{uv}$, $g_c$ & $H_{uv}/(z-1)$, and its coefficients, in the proof & Lemma~\ref{lem:integral} \\
+$\theta$, $w$ & the angle with $z=e^{\ii\theta}$, and $w=\cos\theta$ & Lemma~\ref{lem:integral} \\
+$n_1$, $n_2$ & $u+v-1$ and $2m+1-u-v$ & Section~\ref{sec:circle} \\
+$\rho(w)$, $w_0$ & $\ln|Q_{uv}(e^{\ii\theta})|$ as a function of $w$, and its maximum point & Section~\ref{sec:circle} \\
+$\lambda$, $W_\lambda$ & a width, and the pairs $(u,v)$ within $\lambda\sqrt m$ of $(m/4,m/4)$ in each coordinate & Section~\ref{sec:circle} \\
+$c$, $C$ & positive constants that may depend on $\lambda$ but not on $m$ or $(u,v)$ & Section~\ref{sec:circle} \\
+$\theta_0$, $\theta^*$, $z_0$ & $\arccos w_0$, $\arccos\frac13$, and $e^{\ii\theta_0}$ & Section~\ref{sec:circle} \\
+$G(n_1)$ & the left side of the lemma as a function of $n_1$, in the proof & Lemma~\ref{lem:exponent} \\
+$\Lambda(\theta)$, $\delta$ & $\ln Q_{uv}(e^{\ii\theta})-\ii m\theta$ on a small disc around $\theta^*$, and the radius of that disc & Section~\ref{sec:circle} \\
+$b$, $A$, $T_{uv}$ & $\mathrm{Im}\,\Lambda'(\theta_0)$, $-\Lambda''(\theta_0)$, and the Laplace term $(2\pi A)^{-1/2}\exp(\Lambda(\theta_0)-b^2/(2A))$ & Section~\ref{sec:circle} \\
+$a$, $a'$, $z^*$ & $u/m$, $v/m$, and $e^{\ii\theta^*}$, in the proof & Lemma~\ref{lem:laplace} \\
+$J_\pm$, $h$, $R(h)$ & the arcs $|\theta\mp\theta_0|\le m^{-2/5}$, the offset $\theta-\theta_0$, and the cubic remainder, in the proof & Lemma~\ref{lem:laplace} \\
+$\alpha$ & $\arccos\frac13$, an irrational multiple of $\pi$ & Lemma~\ref{lem:phase} \\
+$g(z)$, $\Lambda^+$ & $(z-1)/X(z)$, and $\Lambda$ for the pair $(u+1,v)$, in the proof & Lemma~\ref{lem:phase} \\
+$\varepsilon$, $L$ & a small number and a block length & Section~\ref{sec:proof} \\
+$\psi_0$, $\ell$, $u_0$ & a phase, an index in a block, and the first $u$ of a block & Section~\ref{sec:proof} \\
+$C_\varepsilon$ & a constant depending on $\varepsilon$ & Section~\ref{sec:proof} \\
+$R_k$ & the ratio $E_x(F_k)/\Inf_x(F_k)$ & Section~\ref{sec:num} \\
+\bottomrule
+\end{longtable}
 
 \begin{thebibliography}{99}
 \bibitem{CKLS} S.~Chakraborty, R.~Kulkarni, S.~V.~Lokam, N.~Saurabh, Upper bounds on Fourier entropy, Theoret.
