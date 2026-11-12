@@ -101,7 +101,7 @@ $r\ge1$, since both terms of $\Phi$ are nonnegative and $(r^2+1)/1\ge r^2$.
 
 Put $P=\frac34$ and $q=\frac14$. The OR of two uniform bits is true with probability $P$ and the AND with probability
 $q$. By the proof of~\cite[Proposition~12]{Shm8}, $E_x(F_k)$ and $\Inf_x(F_k)$ are the erasure entropy and the
-influence of $x$ for the law $c(S)^2$, where $c(S)$ are the coefficients of $\tilde f_k$, in $\pm1$ values, in the
+influence of $x$ for the law $\gamma(S)^2$, where $\gamma(S)$ are the coefficients of $\tilde f_k$, in $\pm1$ values, in the
 orthonormal basis $\prod_{j\in S}\phi_j(y_j)$ (times $2x-1$ when $x\in S$) of the product measure on $(y,x)$ with
 $\Pr[y_j=1]=\mu_j$ and $x$ uniform; here $\mu_j=P$ for $j\le m$, $\mu_j=q$ for $j>m$, and
 $\phi_j(y)=(y-\mu_j)/\sigma$ with $\sigma=\sqrt{Pq}=\sqrt3/4$ (the $\mu$-biased Fourier basis,
@@ -125,7 +125,7 @@ If $m+1\in S$ then $\hat D(S)=0$. If $m+1\notin S$ then
 \]
 where
 \[
-t_{uv}=\sum_{c\ge m+1}[z^c]H_{uv}(z).
+t_{uv}=\sum_{s\ge m+1}[z^s]H_{uv}(z).
 \]
 \end{lemma}
 
@@ -139,7 +139,7 @@ $(-1)^v(q/P)^{(u+v)/2}$, so $\hat D(S)=P^{2m}(-1)^v(q/P)^{(u+v)/2}=(-1)^v\sigma^
 $\widehat{\mathbf 1[y=y^0]}(S)-\widehat{\mathbf 1[y=y^1]}(S)=(P-q)\hat D(S)=\frac12\hat D(S)$. Finally
 $\E[z^{y_j}\phi_j(y_j)]=\mu_jz(1-\mu_j)/\sigma-(1-\mu_j)\mu_j/\sigma=\sigma(z-1)$ and $\E[z^{y_j}]=1-\mu_j+\mu_jz$, so
 by independence $\E[z^{|y|}\prod_{j\in S}\phi_j(y_j)]=\sigma^{u+v}H_{uv}(z)$ when $m+1\notin S$, and $\hat N(S)$ is the
-sum of its coefficients at $z^c$, $c\ge m+1$.
+sum of its coefficients at $z^s$, $s\ge m+1$.
 \end{proof}
 
 Let $\beta_u=\binom mu q^uP^{m-u}$ be the binomial law with parameters $m$ and $q$, and for $0\le u,v\le m$ put
@@ -177,7 +177,7 @@ t_{uv}=[z^m]\,Q_{uv}(z)=\frac1{2\pi}\int_{-\pi}^{\pi}Q_{uv}(e^{\ii\theta})\,e^{-
 \end{lemma}
 
 \begin{proof}
-Write $Q_{uv}=\sum_cg_cz^c$. Then $[z^c]H_{uv}=g_{c-1}-g_c$, and the sum over $c\ge m+1$ telescopes to $g_m$ because
+Write $Q_{uv}=\sum_s\kappa_sz^s$. Then $[z^s]H_{uv}=\kappa_{s-1}-\kappa_s$, and the sum over $s\ge m+1$ telescopes to $\kappa_m$ because
 $Q_{uv}$ has degree one less than $H_{uv}$. The integral is Cauchy's formula on $|z|=1$; coefficient extraction of this kind, followed by a Laplace or
 saddle-point estimate, is standard~\cite[Chapter~VIII]{FS09}.
 \end{proof}
@@ -264,16 +264,16 @@ $\arg T_{u+1,v}-\arg T_{uv}=\alpha+O(m^{-1/2})$ modulo $2\pi$.
 \end{lemma}
 
 \begin{proof}
-Let $g(z)=(z-1)/X(z)$, so that $Q_{u+1,v}=gQ_{uv}$, and denote by $\Lambda^+$, $\theta_0^+$, $b^+$, $A^+$ the
-quantities for $(u+1,v)$. Here $\Lambda^+=\Lambda+\ln g(e^{\ii\theta})$, and $w_0$ changes by $-4/(3m)$, so
+Let $K(z)=(z-1)/X(z)$, so that $Q_{u+1,v}=KQ_{uv}$, and denote by $\Lambda^+$, $\theta_0^+$, $b^+$, $A^+$ the
+quantities for $(u+1,v)$. Here $\Lambda^+=\Lambda+\ln K(e^{\ii\theta})$, and $w_0$ changes by $-4/(3m)$, so
 $\theta_0^+-\theta_0=O(1/m)$. Hence
 \[
-\Lambda^+(\theta_0^+)-\Lambda(\theta_0)=\ln g(z_0)+\Lambda'(\theta_0)(\theta_0^+-\theta_0)+O(1/m)=\ln g(z_0)+O(m^{-1/2})
+\Lambda^+(\theta_0^+)-\Lambda(\theta_0)=\ln K(z_0)+\Lambda'(\theta_0)(\theta_0^+-\theta_0)+O(1/m)=\ln K(z_0)+O(m^{-1/2})
 \]
 by Lemma~\ref{lem:laplace}. Similarly $A^+-A=O(1)$ and $b^+-b=O(1)$, so $\arg A$ moves by $O(1/m)$ and $b^2/(2A)$ by
-$O(|b|/m+b^2/m^2)=O(m^{-1/2})$. So $\arg T$ moves by $\mathrm{Im}\ln g(z_0)+O(m^{-1/2})$. Finally
-$g(z^*)=\frac43z^*$, as $(z^*-1)\overline{X(z^*)}=\frac13+\frac{2\sqrt2}3\ii$ and $|X(z^*)|^2=\frac34$; thus
-$\arg g(z^*)=\theta^*=\alpha$, and $z_0-z^*=O(m^{-1/2})$.
+$O(|b|/m+b^2/m^2)=O(m^{-1/2})$. So $\arg T$ moves by $\mathrm{Im}\ln K(z_0)+O(m^{-1/2})$. Finally
+$K(z^*)=\frac43z^*$, as $(z^*-1)\overline{X(z^*)}=\frac13+\frac{2\sqrt2}3\ii$ and $|X(z^*)|^2=\frac34$; thus
+$\arg K(z^*)=\theta^*=\alpha$, and $z_0-z^*=O(m^{-1/2})$.
 \end{proof}
 
 The number $\alpha/\pi$ is irrational: by Niven's theorem~\cite{Niv}, if $\alpha/\pi$ is rational and $\cos\alpha$ is
@@ -377,8 +377,7 @@ The paper is part of the Math Brain project, whose public repository is
 \appendix
 \section{Notation}\label{app:notation}
 
-Symbols are listed roughly in the order in which they first appear, and the last column gives that place. The letters
-$c$ and $g$ are reused, and each meaning has its own row.
+Symbols are listed roughly in the order in which they first appear, and the last column gives that place.
 
 \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.54\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}@{}}
 \toprule
@@ -399,16 +398,16 @@ $\MAJ_k$, $M$ & the majority function on $k$ bits, and the same with $y^1$ remov
 $\tilde f_k$, $F_k$ & $M(y)\vee(x\wedge[y\ge y^0])$, and the function on $2k+1$ variables obtained from it by replacing each $y_j$ with an OR or an AND of two fresh variables & Section~\ref{sec:intro} \\
 $\Phi(a,b)$, $\Psi(r)$ & $a\log\frac{a+b}a+b\log\frac{a+b}b$, and $\Phi(r^2,1)$ & Section~\ref{sec:sum} \\
 $P$, $q$ & $\frac34$ and $\frac14$, the probabilities that an OR and an AND of two uniform bits are true & Section~\ref{sec:sum} \\
-$c(S)$ & the coefficients of $\tilde f_k$ in the biased basis & Section~\ref{sec:sum} \\
+$\gamma(S)$ & the coefficients of $\tilde f_k$ in the biased basis & Section~\ref{sec:sum} \\
 $\mu_j$, $\phi_j$, $\sigma$ & the bias of $y_j$, the biased basis function $(y-\mu_j)/\sigma$, and $\sigma=\sqrt{Pq}$ & Section~\ref{sec:sum} \\
 $D$, $\bar A$, $N$ & the odd and even parts of $\tilde f_k$ in $x$, and the indicator $\mathbf 1[|y|\ge m+1]$ & Section~\ref{sec:sum} \\
 $u$, $v$ & $|S\cap\{1,\dots,m\}|$ and $|S\cap\{m+2,\dots,k\}|$ & Section~\ref{sec:sum} \\
 $\hat g(S)$ & the coefficient of a function $g$ at $\prod_{j\in S}\phi_j$ & Section~\ref{sec:sum} \\
 $z$ & a complex variable & Section~\ref{sec:sum} \\
 $X$, $Y$, $H_{uv}$ & $q+Pz$, $P+qz$, and $(z-1)^{u+v}X^{m-u}Y^{m+1-v}$ & Section~\ref{sec:sum} \\
-$[z^c]$, $t_{uv}$ & the coefficient of $z^c$, and $\sum_{c\ge m+1}[z^c]H_{uv}$ & Lemma~\ref{lem:coef} \\
+$[z^s]$, $t_{uv}$ & the coefficient of $z^s$, and $\sum_{s\ge m+1}[z^s]H_{uv}$ & Lemma~\ref{lem:coef} \\
 $\beta_u$, $r_{uv}$ & the binomial law $\binom mu q^uP^{m-u}$, and the quotient $|\hat{\bar A}(S)|/|\hat D(S)|$ for sets of type $(u,v)$ & Section~\ref{sec:sum} \\
-$Q_{uv}$, $g_c$ & $H_{uv}/(z-1)$, and its coefficients, in the proof & Lemma~\ref{lem:integral} \\
+$Q_{uv}$, $\kappa_s$ & $H_{uv}/(z-1)$, and its coefficients, in the proof & Lemma~\ref{lem:integral} \\
 $\theta$, $w$ & the angle with $z=e^{\ii\theta}$, and $w=\cos\theta$ & Lemma~\ref{lem:integral} \\
 $n_1$, $n_2$ & $u+v-1$ and $2m+1-u-v$ & Section~\ref{sec:circle} \\
 $\rho(w)$, $w_0$ & $\ln|Q_{uv}(e^{\ii\theta})|$ as a function of $w$, and its maximum point & Section~\ref{sec:circle} \\
@@ -421,7 +420,7 @@ $b$, $A$, $T_{uv}$ & $\mathrm{Im}\,\Lambda'(\theta_0)$, $-\Lambda''(\theta_0)$, 
 $a$, $a'$, $z^*$ & $u/m$, $v/m$, and $e^{\ii\theta^*}$, in the proof & Lemma~\ref{lem:laplace} \\
 $J_\pm$, $h$, $R(h)$ & the arcs $|\theta\mp\theta_0|\le m^{-2/5}$, the offset $\theta-\theta_0$, and the cubic remainder, in the proof & Lemma~\ref{lem:laplace} \\
 $\alpha$ & $\arccos\frac13$, an irrational multiple of $\pi$ & Lemma~\ref{lem:phase} \\
-$g(z)$, $\Lambda^+$ & $(z-1)/X(z)$, and $\Lambda$ for the pair $(u+1,v)$, in the proof & Lemma~\ref{lem:phase} \\
+$K(z)$, $\Lambda^+$ & $(z-1)/X(z)$, and $\Lambda$ for the pair $(u+1,v)$, in the proof & Lemma~\ref{lem:phase} \\
 $\varepsilon$, $L$ & a small number and a block length & Section~\ref{sec:proof} \\
 $\psi_0$, $\ell$, $u_0$ & a phase, an index in a block, and the first $u$ of a block & Section~\ref{sec:proof} \\
 $C_\varepsilon$ & a constant depending on $\varepsilon$ & Section~\ref{sec:proof} \\
