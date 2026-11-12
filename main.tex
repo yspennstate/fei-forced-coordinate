@@ -24,19 +24,19 @@
 
 \begin{abstract}
 The erasure entropy $E_x(f)$ of a Boolean function at a coordinate $x$ is the conditional entropy of the event $x\in U$
-given $U\setminus\{x\}$, where $U$ is drawn from the spectral distribution; it is at most the binary entropy of the
-influence $\Inf_x(f)$. We study a monotone function on $2k+1$ variables, built from a majority function with one hidden
-coordinate by replacing its inputs with ORs and ANDs of two fresh variables, in which one coordinate $x$ is the only
-variable lying in both a shortest minterm and a shortest maxterm. We prove that
-$E_x/\Inf_x=(1+o(1))(k-1)\log_2\frac43=(1+o(1))\log_2(1/\Inf_x)$, so the ratio is asymptotic to the largest value that
-bound allows. The proof writes the relevant biased Fourier coefficients of the majority as integrals over the unit
-circle and uses that their phase advances by $\arccos\frac13$, an irrational multiple of $\pi$.
+given $U\setminus\{x\}$, where $U$ is drawn from the spectral distribution. It is at most the binary entropy of the
+influence $\Inf_x(f)$, so the ratio $E_x/\Inf_x$ is at most about $\log_2(1/\Inf_x)$. We give a monotone function, built
+from a majority function with one hidden coordinate, in which one coordinate is the only variable lying in both a
+shortest minterm and a shortest maxterm, and prove that the ratio at that coordinate is asymptotic to this largest value
+and grows linearly in the number of variables. The proof uses that the phase of the relevant biased Fourier
+coefficients advances by $\arccos\frac13$, an irrational multiple of $\pi$.
 \end{abstract}
 
 \subjclass[2020]{06E30, 42C10, 94A17}
 \keywords{Fourier entropy-influence conjecture, Boolean functions, Fourier entropy, total influence}
 
 \maketitle
+\enlargethispage{2pt}
 
 \section{Introduction}\label{sec:intro}
 
