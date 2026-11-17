@@ -24,12 +24,13 @@
 
 \begin{abstract}
 The erasure entropy $E_x(f)$ of a Boolean function at a coordinate $x$ is the conditional entropy of the event $x\in U$
-given $U\setminus\{x\}$, where $U$ is drawn from the spectral distribution. It is at most the binary entropy of the
-influence $\Inf_x(f)$, so the ratio $E_x/\Inf_x$ is at most about $\log_2(1/\Inf_x)$. We give a monotone function, built
-from a majority function with one hidden coordinate, in which one coordinate is the only variable lying in both a
-shortest minterm and a shortest maxterm, and prove that the ratio at that coordinate is asymptotic to this largest value
-and grows linearly in the number of variables. The proof uses that the phase of the relevant biased Fourier
-coefficients advances by $\arccos\frac13$, an irrational multiple of $\pi$.
+given $U\setminus\{x\}$, where $U$ is the spectral sample of $f$. It is at most the binary entropy of the influence
+$\Inf_x(f)$, so the ratio $E_x/\Inf_x$ is at most about $\log_2(1/\Inf_x)$. Call $x$ a forced coordinate if it is the
+only variable lying both in a shortest minterm and in a shortest maxterm. For a monotone function built from a
+majority of biased bits, whose forced coordinate defeats a selection rule for the Fourier entropy-influence
+conjecture, we prove that the ratio at the forced coordinate is asymptotic to this largest value and grows linearly in
+the number of variables. The proof uses that the phase of the relevant biased Fourier coefficients advances by
+$\arccos\frac13$, an irrational multiple of $\pi$.
 \end{abstract}
 
 \subjclass[2020]{06E30, 42C10, 94A17}
@@ -42,12 +43,15 @@ coefficients advances by $\arccos\frac13$, an irrational multiple of $\pi$.
 
 For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ and let $U$ be a random subset with
 $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy-influence conjecture of Friedgut and Kalai~\cite{FK96} asks for an absolute
-$C$ with $H(U)\le C\,\E|U|$. It is known for symmetric functions and read-once decision trees~\cite{OWZ} and is
-preserved under suitable compositions~\cite{OT13}. Weaker forms and bounds with extra factors are
-in~\cite{CKLS,WWW,KKLMS,Han}. Keller, Mossel and Schlank~\cite[Claim~4.1]{KMS12} bound $H(U)$ by the sum over $i$ of the binary entropies of
-$\Pr[i\in U]$, which gives Han's bound with the constant $1/\ln 2$ in front of $\E|U|$. The conjecture was proved for every linear threshold function in~\cite{ShmLTF}. The largest known lower bound
-on the best constant is $6.5218$~\cite{Num26}. Earlier bounds are due to O'Donnell and Tan~\cite{OT13}, Hod~\cite{Hod}
-and Mosaic Intelligence~\cite{MI26a,MI26b}. The erasure entropy of $f$ at a coordinate $x$ is
+constant $C_{\mathrm{FEI}}$ with $H(U)\le C_{\mathrm{FEI}}\,\E|U|$. It is known for symmetric functions and read-once
+decision trees~\cite{OWZ} and is preserved under suitable compositions~\cite{OT13}. Han~\cite{Han} proved a bound of the
+form
+\[
+H(U)\le C\,\E|U|+\sum_i\Pr[i\in U]\log_2\frac1{\Pr[i\in U]};
+\]
+Keller, Mossel and Schlank~\cite[Claim~4.1]{KMS12} bound $H(U)$ by the sum over $i$ of the binary entropies of
+$\Pr[i\in U]$, which gives this bound with $C=1/\ln 2$. The conjecture for every linear threshold function is proved in
+the preprint~\cite{ShmLTF}. The largest known lower bound on $C_{\mathrm{FEI}}$ is $6.5218$~\cite{Num26}. The erasure entropy of $f$ at a coordinate $x$ is
 \[
 E_x(f)=H\bigl(\mathbf 1[x\in U]\bigm|U\setminus\{x\}\bigr),
 \]
@@ -57,18 +61,14 @@ with $\Inf_x(f)=\Pr[x\in U]$ the conjecture holds if and only if
 \sup_f\ \min_{x:\,\Inf_x(f)>0}\frac{E_x(f)}{\Inf_x(f)}
 \]
 is finite~\cite{Shm1}, which builds on the reduction of Gonz\'alez, MacManus and Pereyra~\cite{GMP} to a
-statement about one coordinate; coordinates at which the ratio is bounded for some classes of functions are studied
-in~\cite{Shm3}. Since conditioning does not increase entropy,
+statement about one coordinate. Coordinates at which the ratio is bounded are studied in~\cite{Shm3}. Since conditioning does not increase entropy,
 \begin{equation}\label{eq:upper}
 \frac{E_x(f)}{\Inf_x(f)}\le\frac{h_2(\Inf_x(f))}{\Inf_x(f)}\le\log_2\frac{e}{\Inf_x(f)}
 \end{equation}
-for every $f$ and $x$ with $\Inf_x(f)>0$.
+for every $f$ and $x$ with $\Inf_x(f)>0$, where $h_2(p)=-p\log_2p-(1-p)\log_2(1-p)$ is the binary entropy.
 
-Which coordinate to take is the difficulty. In~\cite{Shm8} several natural selection rules are shown to fail on monotone
-functions, among them the rule that takes, among the variables lying both in a shortest minterm and in a shortest
-maxterm, one of smallest ratio. For that rule the counterexample is a family $F_{k,t}$ in which a coordinate $x$ is the
-only variable of both kinds, and the ratio at $x$ is unbounded when $k$ and $t$ grow together. Here we treat the smallest case $t=1$, the simplest member of the family, and
-find the exact rate of growth; the extension to every fixed $t$ and to every rational bias is in~\cite{Shm10}.
+By~\cite{Shm1} it suffices to find in every $f$ one coordinate of bounded ratio; the question is which. We call a
+variable that is the only one lying both in a shortest minterm and in a shortest maxterm a \emph{forced coordinate}.
 
 Fix an odd $k=2m+1$ and let $y^0\in\{0,1\}^k$ be the point with $y^0_j=1$ for $j\le m$ and $y^0_j=0$ for $j>m$,
 and $y^1=y^0+e_{m+1}$. Let $M$ be the majority function $\MAJ_k$ with the point $y^1$ removed from its true set, and
@@ -77,8 +77,25 @@ and $y^1=y^0+e_{m+1}$. Let $M$ be the majority function $\MAJ_k$ with the point 
 \]
 Let $F_k$ be the function of $2k+1$ variables obtained from $\tilde f_k$ by replacing $y_j$ with the OR of two fresh
 variables for $j\le m$ and with the AND of two fresh variables for $j>m$. It is the function $F_{k,1}$
-of~\cite[Section~5]{Shm8}; it is monotone, and $x$ is the only variable that lies both in a shortest minterm and in a
-shortest maxterm of $F_k$~\cite[Section~5]{Shm8}.
+of~\cite[Section~5]{Shm8}; it is monotone, and $x$ is a forced coordinate of $F_k$~\cite[Section~5]{Shm8}.
+
+In~\cite[Section~5]{Shm8} the rule that takes, among the variables lying both in a shortest minterm and in a shortest
+maxterm, one of smallest ratio is shown to fail on monotone functions: in the family $F_{k,t}$ the coordinate $x$ is
+the only variable of both kinds, and the ratio at $x$ is unbounded when $k$ and $t$ grow together. Here $t=1$ stays
+fixed, and the inputs of the majority become biased, with probabilities $\frac34$ and $\frac14$. The ratio is then an
+average over classes of Fourier coefficients of the majority's upper tail, and each of these is a sum of terms of both
+signs, so its size is not visible term by term. We write each coefficient as an integral over the unit circle and
+estimate it by the saddle-point method~\cite[Chapter~VIII]{FS09}. Passing from one class to the next multiplies the
+integrand by $(z-1)/(\frac14+\frac34z)$, and at the point $z=e^{\ii\alpha}$ where the integrand peaks,
+\[
+\frac{z-1}{\frac14+\frac34z}=\frac43\,e^{\ii\alpha},\qquad \alpha=\arccos\tfrac13 .
+\]
+So from one class to the next the phase of the leading term turns by $\alpha$. Since $\alpha/\pi$ is irrational by
+Niven's theorem~\cite{Niv}, Weyl's theorem~\cite{Weyl16} makes the cosine of that phase small on only a small part of
+the weight, and on the rest the coefficient is as large as the peak of the integrand. The result is that the ratio at
+$x$ attains the upper bound~\eqref{eq:upper} up to a factor $1+o(1)$. In~\cite{Shm10} this proof, with the lemmas of
+Sections~\ref{sec:sum} and~\ref{sec:circle}, is carried to every fixed $t$ and every rational bias, and~\cite{Shm8}
+states the case $t=1$ with a reference to the present paper.
 
 \begin{theorem}\label{thm:main}
 $\Inf_x(F_k)=(3/4)^{k-1}$ and, as $k\to\infty$ through odd values,
@@ -98,12 +115,12 @@ with $\Phi(a,0)=\Phi(0,b)=0$, and $\Psi(r)=\Phi(r^2,1)$ for $r\ge0$. Then $\Psi\
 $r\ge1$, since both terms of $\Phi$ are nonnegative and $(r^2+1)/1\ge r^2$.
 
 Put $P=\frac34$ and $q=\frac14$. The OR of two uniform bits is true with probability $P$ and the AND with probability
-$q$. By the proof of~\cite[Proposition~12]{Shm8}, $E_x(F_k)$ and $\Inf_x(F_k)$ are the erasure entropy and the
-influence of $x$ for the law $\gamma(S)^2$, where $\gamma(S)$ are the coefficients of $\tilde f_k$, in $\pm1$ values, in the
-orthonormal basis $\prod_{j\in S}\phi_j(y_j)$ (times $2x-1$ when $x\in S$) of the product measure on $(y,x)$ with
-$\Pr[y_j=1]=\mu_j$ and $x$ uniform; here $\mu_j=P$ for $j\le m$, $\mu_j=q$ for $j>m$, and
-$\phi_j(y)=(y-\mu_j)/\sigma$ with $\sigma=\sqrt{Pq}=\sqrt3/4$ (the $\mu$-biased Fourier basis,
-see~\cite[Chapter~8]{OD14}; the conjecture for biased product measures is formulated in~\cite{KMS12}).
+$q$. Let $\mu_j=P$ for $j\le m$ and $\mu_j=q$ for $j>m$, and take the product measure on $(y,x)$ with
+$\Pr[y_j=1]=\mu_j$ and $x$ uniform. Its orthonormal basis is $\prod_{j\in S}\phi_j(y_j)$, times $2x-1$ when $x\in S$,
+where $\phi_j(y)=(y-\mu_j)/\sigma$ and $\sigma=\sqrt{Pq}=\sqrt3/4$; this is the $\mu$-biased Fourier basis
+of~\cite[Chapter~8]{OD14}, and the conjecture for biased product measures is formulated in~\cite{KMS12}. By the proof
+of~\cite[Proposition~12]{Shm8}, $E_x(F_k)$ and $\Inf_x(F_k)$ are the erasure entropy and the influence of $x$ for the
+law given by the squares of the coefficients of $\tilde f_k$, in $\pm1$ values, in this basis.
 
 With $+1$ for true, $\tilde f_k=\bar A+(2x-1)D$, where
 \[
@@ -161,9 +178,8 @@ $r_{uv}$ by Lemma~\ref{lem:coef}, and $\binom mu\binom mv(Pq)^{u+v}P^{2(2m-u-v)}
 \end{proof}
 
 So $E_x/\Inf_x$ is the mean of $\Psi(r_{uv})$ when $u$ and $v$ are independent binomial variables with parameters $m$ and
-$\frac14$. Most of that law sits near $u=v=m/4$, and the theorem says that there $\log r_{uv}^2$ is close to
-$2m\log\frac43$ for almost all $(u,v)$. The difficulty is that $t_{uv}$ is a sum of terms of both signs; we show that it
-oscillates, in $u$, like the cosine of an irrational rotation times an exponentially large envelope.
+$\frac14$. Most of that law sits near $u=v=m/4$, and the proof shows that there $\log r_{uv}^2$ is close to
+$2m\log\frac43$ for almost all $(u,v)$.
 
 \section{The tail on the unit circle}\label{sec:circle}
 
@@ -213,7 +229,7 @@ $G(m/2)=\frac m4\ln\frac43+\frac{3m}4\ln\frac34+(\frac{3m}2-1)\ln\frac43=(m-1)\l
 \end{proof}
 
 Fix $(u,v)\in W_\lambda$ and let $\Lambda(\theta)=\ln Q_{uv}(e^{\ii\theta})-\ii m\theta$, for complex $\theta$ with
-$|\theta-\theta^*|\le\delta$, where $\delta>0$ is so small that $e^{\ii\theta}$ stays away from $1$, $-\frac13$ and $-3$,
+$|\theta-\theta^*|\le\delta$, where $\delta>0$ depends only on $\theta^*$ and is so small that $e^{\ii\theta}$ stays away from $1$, $-\frac13$ and $-3$,
 the zeros of $z-1$, $X$ and $Y$; the logarithm is the branch continuous in this disc. Since $\Lambda$ is a sum of at most
 $2m+1$ logarithms of functions analytic and nonvanishing there, plus a linear term, $|\Lambda''|$ and $|\Lambda'''|$ are
 at most $Cm$ on the disc. For real $\theta$, $\mathrm{Re}\,\Lambda(\theta)=\rho(\cos\theta)$, so
@@ -300,7 +316,7 @@ Let $(u,v)\in W_\lambda$ have $|\cos\arg T_{uv}|\ge\varepsilon$. By Lemma~\ref{l
 $|t_{uv}|\ge2\varepsilon|T_{uv}|-C|T_{uv}|m^{-1/5}\ge\varepsilon|T_{uv}|\ge c\varepsilon m^{-1/2}e^{\rho(w_0)}$, and
 $(u,v)\ne(0,0)$. With $2m-u-v=n_2-1$ and Lemma~\ref{lem:exponent},
 \[
-r_{uv}\ge\frac{2|t_{uv}|}{P^{n_2-1}}-\frac12\ge c\varepsilon m^{-1/2}\Bigl(\frac43\Bigr)^m-\frac12,
+r_{uv}\ge\frac{2|t_{uv}|}{P^{n_2-1}}-\frac12\ge c\varepsilon m^{-1/2}\Bigl(\frac43\Bigr)^{m-1}-\frac12,
 \]
 which exceeds $1$ for $m$ large, and then $\Psi(r_{uv})\ge\log r_{uv}^2\ge2m\log\frac43-\log m-C_\varepsilon$. By
 Chebyshev's inequality $\Pr[|u-m/4|>\lambda\sqrt m]\le\frac{3}{16\lambda^2}$, so $W_\lambda$ has weight at least
@@ -318,12 +334,12 @@ $\pi-\alpha$ and the step from $(u,v)$ to $(u+1,v+1)$ is $\pi$: to first order t
 diagonals.
 \end{remark}
 
-\section{Numerical checks}\label{sec:num}
+\section{Numerical values}\label{sec:num}
 
 Lemma~\ref{lem:sum} turns the ratio into a double sum of $(m+1)^2$ terms whose ingredients are integers over powers of
 $4$, so the coefficients can be computed exactly in rational arithmetic; each term of $\Phi$ is then evaluated as
 $a\log(1+b/a)$ with a $\log(1+\cdot)$ routine, since $a/b$ exceeds $10^{17}$ from $k=35$ on and is about $2\cdot10^{69}$ at $k=121$. The ratio $R_k=E_x(F_k)/\Inf_x(F_k)$ and the quotient
-$R_k/((k-1)\log\frac43)$ are:
+$R_k/((k-1)\log\frac43)$ are as follows (the same values are listed in~\cite[Section~5]{Shm8}):
 \begin{center}
 \begin{tabular}{rrr@{\qquad}rrr}
 \toprule
@@ -335,12 +351,10 @@ $81$ & $29.311$ & $0.883$ & $141$ & $53.319$ & $0.918$\\
 \bottomrule
 \end{tabular}
 \end{center}
-For $k=3,5,7,9$ the values $1.0512$, $1.8769$, $2.5690$, $3.1179$ agree to $10^{-9}$ with the ratio computed from the
-full Walsh--Hadamard transform of $F_k$ on $7$, $11$, $15$ and $19$ variables, which also confirms that $x$ is the
-only variable in both a shortest minterm and a shortest maxterm. The Laplace approximation of
-Lemma~\ref{lem:laplace} was compared with the exact $t_{uv}$ over all of $W_1$: the largest error relative to
-$|T_{uv}|$ is $0.149$, $0.095$ and $0.071$ at $k=41$, $81$ and $141$, about $0.6\,m^{-1/2}$. Since $\rho$ is strictly concave and $\cos$ is decreasing on $(0,\pi)$,
-$|Q_{uv}(e^{\ii\theta})|=e^{\rho(\cos\theta)}$ has no local maximum on $(0,\pi)$ other than $\theta_0$.
+For $k=3,5,7,9$ the double sum of Lemma~\ref{lem:sum} gives $1.0512$, $1.8769$, $2.5690$, $3.1179$, and the
+Walsh--Hadamard transform of $F_k$ on $7$, $11$, $15$ and $19$ variables gives the same values to within $10^{-9}$.
+Over $W_1$ the largest value of $|t_{uv}-2\,\mathrm{Re}\,T_{uv}|/|T_{uv}|$ is $0.149$, $0.095$ and $0.071$ at $k=41$,
+$81$ and $141$, about $0.6\,m^{-1/2}$.
 
 \section*{Acknowledgements and funding}
 This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math
@@ -363,14 +377,15 @@ These entities are included in the funding declaration above.
 
 \section*{Declaration of generative AI and AI-assisted technologies}
 The paper comes out of Math Brain, a project on the use of AI systems in research mathematics~\cite{BrainFramework,MathBrainRepo}. The family $F_{k,t}$
-is from~\cite{Shm8}. Claude Opus 5.5 (Anthropic) found Theorem~\ref{thm:main} and its proof, wrote the numerical
-checks and prepared the manuscript. The author directed the work and is responsible for the content of the paper.
+and the reduction to biased coefficients are from~\cite{Shm8}. The proof uses the erasure entropy of Verd\'u and
+Weissman~\cite{VW08} and the one-coordinate reduction of Gonz\'alez, MacManus and Pereyra~\cite{GMP} in the form
+of~\cite{Shm1}. It also uses the biased Fourier analysis of Keller, Mossel and Schlank~\cite{KMS12}, Niven's
+theorem~\cite{Niv}, Weyl's equidistribution theorem~\cite{Weyl16} and the saddle-point method as presented by Flajolet
+and Sedgewick~\cite{FS09}. Claude Opus 5.5 (Anthropic) found Theorem~\ref{thm:main} and its proof, wrote the numerical
+computations and prepared the manuscript. The author directed the work and is responsible for the content of the paper.
 
 \section*{Code and data availability}
-Code and outputs: \url{https://github.com/yspennstate/fei-forced-coordinate}, archived on Zenodo with doi:10.5281/zenodo.24126356.
-
-The paper is part of the Math Brain project, whose public repository is
-\url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+Code and outputs: \url{https://github.com/yspennstate/fei-forced-coordinate}, archived on Zenodo with doi:10.5281/zenodo.24126356 (all versions).
 
 \appendix
 \section{Notation}\label{app:notation}
@@ -385,8 +400,8 @@ Symbol & Meaning & First appears \\
 $f$, $\hat f(S)$, $\chi_S$ & a Boolean function $\{0,1\}^n\to\{-1,1\}$, its Fourier coefficient at $S$, and the character at $S$ & Section~\ref{sec:intro} \\
 $n$ & the number of variables of $f$ & Section~\ref{sec:intro} \\
 $U$ & a random subset with $\Pr[U=S]=\hat f(S)^2$ & Section~\ref{sec:intro} \\
-$C$ & an absolute constant, as in $H(U)\le C\,\E|U|$ & Section~\ref{sec:intro} \\
-$x$ & a coordinate; for $F_k$, the coordinate lying in both a shortest minterm and a shortest maxterm & Section~\ref{sec:intro} \\
+$C_{\mathrm{FEI}}$ & the constant of the conjecture, as in $H(U)\le C_{\mathrm{FEI}}\,\E|U|$ & Section~\ref{sec:intro} \\
+$x$ & a coordinate; for $F_k$, its forced coordinate, the only variable lying in both a shortest minterm and a shortest maxterm & Section~\ref{sec:intro} \\
 $E_x(f)$, $\Inf_x(f)$ & the erasure entropy $H(\mathbf 1[x\in U]\mid U\setminus\{x\})$, and the influence $\Pr[x\in U]$ & Section~\ref{sec:intro} \\
 $h_2$ & the binary entropy & Section~\ref{sec:intro} \\
 $F_{k,t}$ & the family of monotone functions of~\cite[Section~5]{Shm8} & Section~\ref{sec:intro} \\
@@ -396,7 +411,6 @@ $\MAJ_k$, $M$ & the majority function on $k$ bits, and the same with $y^1$ remov
 $\tilde f_k$, $F_k$ & $M(y)\vee(x\wedge[y\ge y^0])$, and the function on $2k+1$ variables obtained from it by replacing each $y_j$ with an OR or an AND of two fresh variables & Section~\ref{sec:intro} \\
 $\Phi(a,b)$, $\Psi(r)$ & $a\log\frac{a+b}a+b\log\frac{a+b}b$, and $\Phi(r^2,1)$ & Section~\ref{sec:sum} \\
 $P$, $q$ & $\frac34$ and $\frac14$, the probabilities that an OR and an AND of two uniform bits are true & Section~\ref{sec:sum} \\
-$\gamma(S)$ & the coefficients of $\tilde f_k$ in the biased basis & Section~\ref{sec:sum} \\
 $\mu_j$, $\phi_j$, $\sigma$ & the bias of $y_j$, the biased basis function $(y-\mu_j)/\sigma$, and $\sigma=\sqrt{Pq}$ & Section~\ref{sec:sum} \\
 $D$, $\bar A$, $N$ & the odd and even parts of $\tilde f_k$ in $x$, and the indicator $\mathbf 1[|y|\ge m+1]$ & Section~\ref{sec:sum} \\
 $u$, $v$ & $|S\cap\{1,\dots,m\}|$ and $|S\cap\{m+2,\dots,k\}|$ & Section~\ref{sec:sum} \\
@@ -427,8 +441,6 @@ $R_k$ & the ratio $E_x(F_k)/\Inf_x(F_k)$ & Section~\ref{sec:num} \\
 \end{longtable}
 
 \begin{thebibliography}{99}
-\bibitem{CKLS} S.~Chakraborty, R.~Kulkarni, S.~V.~Lokam, N.~Saurabh, Upper bounds on Fourier entropy, Theoret.
-Comput. Sci. 654 (2016), 92--112.
 \bibitem{FS09} P.~Flajolet, R.~Sedgewick, \emph{Analytic Combinatorics}, Cambridge University Press, 2009.
 \bibitem{GMP} M.~J.~Gonz\'alez, P.~MacManus, M.~C.~Pereyra, Further evidence towards the Fourier entropy-influence
 conjecture, arXiv:2606.00246, 2026.
@@ -436,14 +448,8 @@ conjecture, arXiv:2606.00246, 2026.
 124 (1996), 2993--3002.
 \bibitem{Han} X.~Han, A new bound for the Fourier-entropy-influence conjecture, Combinatorica 45 (2025), no.~1,
 Art.~4, doi:10.1007/s00493-024-00133-z; arXiv:2312.08271.
-\bibitem{Hod} R.~Hod, Improved lower bounds for the Fourier entropy/influence conjecture via lexicographic functions,
-arXiv:1711.00762, 2017.
-\bibitem{KKLMS} E.~Kelman, G.~Kindler, N.~Lifshitz, D.~Minzer, M.~Safra, Towards a proof of the Fourier-entropy
-conjecture?, Geom. Funct. Anal. 30 (2020), 1097--1138.
 \bibitem{KMS12} N.~Keller, E.~Mossel, T.~Schlank, A note on the entropy/influence conjecture, Discrete Math. 312
 (2012), 3364--3372, arXiv:1105.2651.
-\bibitem{MI26a} Mosaic Intelligence, A certified lower bound $C_{71}\ge 6.4901128435233943$ for the Fourier entropy-influence constant, Zenodo, 2026, doi:10.5281/zenodo.20794146.
-\bibitem{MI26b} Mosaic Intelligence, A certified $n=17$ lower bound for the Fourier entropy-influence constant, Zenodo, 2026, doi:10.5281/zenodo.21113935.
 \bibitem{Num26} Numaro, Improved lower bound $C_{71}>6.521845710923046575$ for the Fourier entropy-influence constant ($n=18$ explicit construction), certificate archive, Zenodo, 2026, doi:10.5281/zenodo.21497769.
 \bibitem{OD14} R.~O'Donnell, \emph{Analysis of Boolean Functions}, Cambridge University Press, 2014.
 \bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture, ICALP 2013,
@@ -452,8 +458,6 @@ Lecture Notes in Comput. Sci. 7965, 780--791, doi:10.1007/978-3-642-39206-1\_66.
 Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
 \bibitem{VW08} S.~Verd\'u, T.~Weissman, The information lost in erasures, IEEE Trans. Inform. Theory 54 (2008),
 5030--5058.
-\bibitem{WWW} A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols, and the Fourier entropy-influence conjecture, ITCS 2014,
-arXiv:1312.3003.
 \bibitem{Weyl16} H.~Weyl, \"Uber die Gleichverteilung von Zahlen mod.~Eins, Math. Ann. 77 (1916), 313--352.
 \bibitem{Niv} I.~Niven, \emph{Irrational Numbers}, Carus Mathematical Monographs 11, Mathematical Association of
 America, 1956, Corollary~3.12.
@@ -463,7 +467,7 @@ America, 1956, Corollary~3.12.
 \url{https://github.com/yspennstate/fei-good-coordinates}, doi:10.5281/zenodo.24125398, 2026.
 \bibitem{Shm8} Y.~Shmalo, Hidden coordinates and selection rules in the Fourier entropy-influence conjecture,
 \url{https://github.com/yspennstate/fei-hidden-coordinates}, doi:10.5281/zenodo.24125561, 2026.
-\bibitem{Shm10} Y.~Shmalo, The erasure entropy of a forced coordinate under every bias,
+\bibitem{Shm10} Y.~Shmalo, The erasure entropy of a forced coordinate under rational biases,
 \url{https://github.com/yspennstate/fei-forced-coordinate-bias}, doi:10.5281/zenodo.24127682, 2026.
 \bibitem{ShmLTF} Y.~Shmalo, Fourier entropy of threshold functions and their compositions,
 arXiv:2610.16069, 2026.
